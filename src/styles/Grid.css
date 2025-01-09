@@ -1,0 +1,151 @@
+/* Global Reset */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  overflow: hidden; /* Prevent scrolling on the body */
+  height: 100vh; /* Ensure the body takes full height */
+}
+
+/* Scrollable container styles */
+.scrollable-container {
+  width: 98vw;
+  max-height: 100vh; /* Limit max height to viewport height */
+  overflow-y: auto; /* Enable vertical scrolling */
+  margin: auto;
+  padding-right: 10px; /* Optional: Prevent content from touching the scrollbar */
+  box-sizing: border-box; /* Include padding and border in width/height calculations */
+  scrollbar-width: none;
+}
+
+/* Pinterest-like grid styles */
+.pinterest-grid {
+  column-count: 3; /* Number of columns */
+  column-gap: 30px; /* Gap between columns */
+}
+
+.grid-item {
+  margin-bottom: 30px; /* Space between rows */
+  break-inside: avoid; /* Prevent items from breaking into two columns */
+  position: relative;
+  display: block;
+  transition: opacity 0.5s ease-in;
+}
+
+.grid-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: 0.5s ease;
+}
+
+.grid-item:hover img {
+  opacity: 0.4;
+}
+
+.grid-item:hover .overlay {
+  opacity: 1;
+}
+
+/* Image overlay */
+.overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  color: white;
+  padding: 25px;
+  display: flex;
+  justify-content: right;
+  gap: 15px;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.overlay-btn {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+  font-family: 'General Sans', sans-serif;
+  font-size: 13px;
+  font-weight: bold;
+  background-color: white;
+  color: black;
+  border: none;
+  border-radius: 50%;
+  transition: background-color 0.5s ease, color 0.5s ease, opacity 0.5s ease, box-shadow 0.5s ease;
+}
+
+.overlay-btn > i {
+  color: black;
+}
+
+.overlay-btn:hover {
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2),
+              0 0 20px rgba(255, 255, 255, 0.2),
+              0 0 30px rgba(255, 255, 255, 0.2),
+              0 0 40px rgba(255, 255, 255, 0.2);
+}
+
+/* Fullscreen overlay */
+.fullscreen-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: fadeIn 0.5s ease-out;
+}
+
+.overlay-content {
+  position: relative;
+  text-align: center;
+  color: white;
+  max-width: 90vw;
+  max-height: 80vh;
+  transform: scale(0.9);
+  opacity: 0;
+  animation: fadeInOverlay 0.5s ease-out forwards;
+}
+
+.fullscreen-image {
+  max-width: 100%;
+  max-height: 60vh;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+.image-description {
+  margin-top: 15px;
+  font-size: 1.2rem;
+  color: #ddd;
+}
+
+/* Keyframes for the overlay fade-in */
+@keyframes fadeIn {
+  from {
+    background-color: rgba(0, 0, 0, 0);
+  }
+  to {
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+}
+
+/* Keyframes for slide-in animation */
+@keyframes fadeInOverlay {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

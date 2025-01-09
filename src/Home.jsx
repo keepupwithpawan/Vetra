@@ -1,14 +1,15 @@
 import React from 'react'
-import './App.css'
-import Navbar from './components/Navbar'
+import './styles/Home.css'
+import NavbarHome from './components/NavbarHome'
 import Grid from './Grid'
 
-function App() {
+function Home() {
   return (
     <>
+      <NavbarHome />
       <Grid />
     </>
   )
 }
 
-export default App
+export default Home

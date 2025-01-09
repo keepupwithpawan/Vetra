@@ -1,0 +1,44 @@
+.popup {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%) translateY(-10px); /* Start slightly above */
+    background-color: #fff;
+    color: #000;
+    padding: 7px 12px;
+    border-radius: 6px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    font-size: 14px;
+    opacity: 0;
+    z-index: 2000; /* Ensures it floats above all other elements */
+    animation: fadeOut 0.3s ease forwards; /* Default animation */
+}
+
+.popup.visible {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+    animation: fadeIn 0.5s ease forwards; /* Animate in when visible */
+}
+
+/* Keyframes for animations */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-10px); /* Start slightly above */
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0); /* End in place */
+    }
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0); /* Start in place */
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-10px); /* Move slightly above */
+    }
+}

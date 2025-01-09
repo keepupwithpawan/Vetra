@@ -1,0 +1,194 @@
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: auto; /* Allow scrolling on the whole page */
+}
+
+#bookmarks-wrapper {
+    width: 100vw;
+    min-height: 100vh; /* Ensure the wrapper takes at least the full height of the screen */
+    overflow-y: auto; /* Enable scrolling for the bookmarks container */
+    margin-top: -20px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Two columns */
+    gap: 20px; /* Adds space between the grid items */
+    padding: 20px;
+    box-sizing: border-box; /* Ensures padding doesn't affect the layout */
+}
+
+#bookmarks-container {
+    height: 500px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 10px;
+    background-color: #1c1c1c;
+}
+
+#bookmarks-container > #banner {
+    width: 100%;
+    height: 50%;
+    background: url(https://pawan-kamat-portfolio.vercel.app/images/Breather-Home.png) center;
+    background-size: cover;
+    border-radius: 10px;
+}
+
+#bookmarks-container > #bookmarks {
+    width: 100%;
+    height: 50%;
+    background-color: #1c1c1c;
+    color: white;
+    border-radius: 10px;
+}
+
+#bookmarks-container > #bookmarks > #bookmarks-nav {
+    width: 100%;
+    height: 20%;
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#bookmarks-container > #bookmarks > #bookmarks-nav > #title {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+#bookmarks-container > #bookmarks > #bookmarks-nav > #bookmarks-btns {
+    display: flex;
+    align-items: center;
+}
+
+#bookmarks-container > #bookmarks > #bookmarks-nav > #bookmarks-btns > .bookmarks-btn {
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    margin-left: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    background-color: white;
+    color: black;
+    border: none;
+    border-radius: 50%;
+    transition: box-shadow 0.5s ease;
+}
+
+#bookmarks-container > #bookmarks > #bookmarks-nav > #bookmarks-btns > .bookmarks-btn:hover {
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.2),
+        0 0 7px rgba(255, 255, 255, 0.2),
+        0 0 10px rgba(255, 255, 255, 0.2),
+        0 0 12px rgba(255, 255, 255, 0.2);
+}
+
+#bookmarks-container > #bookmarks > #bookmarks-content {
+    width: 100%;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+}
+
+#bookmarks-container > #bookmarks > #bookmarks-content > #tags {
+    width: 100%;
+    height: 20%;
+    margin-top: 10px;
+}
+
+#bookmarks-container > #bookmarks > #bookmarks-content > #tags > ul {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+#bookmarks-container > #bookmarks > #bookmarks-content > #tags > ul > li {
+    list-style: none;
+    margin-right: 10px;
+    padding: 5px 10px;
+    font-size: 11px;
+    border: 1px solid white;
+    border-radius: 20px;
+}
+
+#bookmarks-container > #bookmarks > #bookmarks-content > #about {
+    width: 92%;
+    display: flex;
+    justify-self: center;
+}
+
+#bookmarks-container > #bookmarks > #bookmarks-content > #about > #github-about {
+    margin-top: 20px;
+}
+
+#bookmarks-container > #bookmarks > #bookmarks-content > #buttons {
+    width: 100%;
+    height: 20%;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    color: black;
+}
+
+#bookmarks-container > #bookmarks > #bookmarks-content > #buttons > #github-btn {
+    cursor: pointer;
+    padding: 5px 10px;
+    margin: 20px 0 0 0;
+    display: flex;
+    justify-self: center;
+    align-items: center;
+    align-self: flex-end;
+    border-radius: 5px;
+    background-color: white;
+    color: black;
+    text-decoration: none;
+    font-size: 13px;
+}
+
+#bookmarks-container > #bookmarks > #bookmarks-content > #buttons > #github-btn > i {
+    color: black;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    #bookmarks-wrapper {
+        grid-template-columns: 1fr; /* Stack bookmarks vertically on small screens */
+    }
+    
+    #bookmarks-container {
+        width: 100%; /* Ensure each container takes full width on smaller screens */
+    }
+}
+
+#empty {
+    width: 100vw;
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#empty > h4 {
+    margin-right: 10px;
+    font-size: 20px;
+    color: white;
+}
+
+#loading > img {
+    width: 20px;
+    height: 20px;
+    animation: rotate 2s linear infinite;
+}
+
+@keyframes rotate {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+}
