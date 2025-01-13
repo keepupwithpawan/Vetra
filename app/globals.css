@@ -1,0 +1,129 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --Accent-Black: #121212;
+  --Accent-White: #faf9f9;
+  --Green: #137547;
+  --Blue: #0a2472;
+  --Purple: #933eff;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: black;
+  color: white;
+  font-family: "General Sans", sans-serif;
+  overflow: hidden;
+}
+
+.fade-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 1s ease;
+  z-index: 1000;
+}
+
+.fade-overlay.active {
+  opacity: 1;
+}
+
+.loading-container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
+  color: white;
+  position: relative;
+}
+
+.loading-text {
+  font-size: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  letter-spacing: 0.1em;
+  position: relative;
+  z-index: 2;
+}
+
+.loading-text span {
+  padding: 40px;
+  background: none;
+  transition: opacity 0.3s ease;
+  display: inline-block;
+}
+
+.loading-text.flash {
+  animation: textFlash 2s ease-in;
+}
+
+.white-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  opacity: 0;
+  z-index: 3;
+  animation: whiteFlash 1s ease-in;
+  transition: filter 1s ease, text-shadow 2s ease;
+}
+
+@keyframes textFlash {
+  0% {
+    filter: brightness(1);
+    text-shadow: none;
+  }
+  20% {
+    filter: brightness(1.4);
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+  }
+  40% {
+    filter: brightness(1.8);
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+  }
+  60% {
+    filter: brightness(2.2);
+    text-shadow: 0 0 30px rgba(255, 255, 255, 0.7);
+  }
+  80% {
+    filter: brightness(2.6);
+    text-shadow: 0 0 40px rgba(255, 255, 255, 0.8);
+  }
+  100% {
+    filter: brightness(3);
+    text-shadow: 0 0 50px rgba(255, 255, 255, 1),
+      0 0 70px rgba(255, 255, 255, 1), 0 0 90px rgba(255, 255, 255, 1);
+  }
+}
+
+@keyframes whiteFlash {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@layer base {
+  :root {
+    --radius: 0.5rem;
+  }
+}

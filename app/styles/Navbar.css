@@ -1,0 +1,57 @@
+#nav {
+  /* position: fixed; */
+  width: 100%;
+  height: 12vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 15px;
+  font-weight: bold;
+  z-index: 100;
+  /* background-color: red; */
+}
+  
+#nav > #left {
+  background: none;
+  margin-right: 2%;
+  font-family: 'Melodrama', serif;
+  font-size: 17px;
+  background: white;
+  color: black;
+  font-weight: bold;
+  padding: 10px 17px;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2), /* Intensified glow */
+  0 0 20px rgba(255, 255, 255, 0.2),
+  0 0 30px rgba(255, 255, 255, 0.2),
+  0 0 40px rgba(255, 255, 255, 0.2);
+}
+
+#nav > #floating-bar {
+  width: 18%;
+  height: 60%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#nav > #floating-bar > #right {
+  width: 100%;
+  padding: 15px 20px;
+  background: rgba(255, 255, 255, 0.082);
+  border-radius: 10px;
+}
+
+#nav > #floating-bar > #right > ul {
+  background: none;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  list-style: none;
+}
+
+#nav > #floating-bar > #right > ul > li {
+  cursor: pointer;
+  background: none;
+}
