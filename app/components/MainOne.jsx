@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import {useRouter} from "next/navigation"
 import "../styles/MainOne.css";
-import CubeVid from "../assets/cube-trans.webm";
+
 
 export default function MainOne({ onTransition }) {
-  const navigate = useNavigate(); // Hook for navigation
+  const navigate = useRouter(); // Hook for navigation
 
   const handleRedirect = () => {
-    navigate("/home"); // Redirect to /home
+    navigate.push("/home"); // Redirect to /home
   };
 
   const [isTransitioning, setIsTransitioning] = useState(false);

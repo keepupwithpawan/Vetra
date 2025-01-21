@@ -49,7 +49,7 @@ export default function Info() {
 
         if (projectError) throw projectError;
 
-        const projectImage = projectImages.find(img => img.repo_name === repoName);
+        const projectImage = projectImages.find((img: { repo_name: string; src: string }) => img.repo_name === repoName);
 
         setProject({
           ...projectData,
@@ -169,12 +169,12 @@ export default function Info() {
         <div id="info-container">
           <div id="banner">
             {project.display_image && (
-              <img 
+              <img
                 src={project.display_image}
                 alt={project.repo_name}
-                style={{ 
-                  width: '100%', 
-                  height: '100%', 
+                style={{
+                  width: '100%',
+                  height: '100%',
                   objectFit: 'cover'
                 }}
               />

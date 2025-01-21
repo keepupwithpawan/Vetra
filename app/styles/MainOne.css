@@ -32,7 +32,7 @@ body {
 #main > #lander-container > #lander-img {
   width: 50%;
   height: 100%;
-  background: url('../assets/ascii-art.png');
+  background: url('../../public/assets/ascii-art.png');
   background-size: cover;
   border-radius: 10px;
   /* background-color: red; */

@@ -5,17 +5,22 @@ import { useUser } from '@clerk/clerk-react';
 import supabase from '@/utils/SupabaseClient';
 import NavbarHome from '../components/NavbarHome';
 
+// Updated interface to match exact database column names
 interface Project {
     id: number;
     repo_name: string;
     description: string;
     category: string;
-    image?: string;
-    banner_image?: string;
+    images?: string;
     repo_source: string;
-    live_demo?: string;
-    github_username: string;
+    live_demo: string;
+    githubusername: string;  // Changed from github_username to githubusername
     created_at: string;
+}
+
+interface BookmarkData {
+    project_id: number;
+    projects: Project;
 }
 
 interface PopupState {
@@ -30,16 +35,20 @@ export default function BookmarksPage() {
     const [popup, setPopup] = useState<PopupState>({ message: '', visible: false });
 
     const getImageUrl = (imageUrl: string | undefined) => {
-        if (!imageUrl) return null;
+        if (!imageUrl) return '/placeholder.png';
+
+        if (imageUrl.startsWith('http://') || imageUrl.startsWith('https://')) {
+            return imageUrl;
+        }
+
         try {
             const { data } = supabase.storage
                 .from('photos')
-                .getPublicUrl(imageUrl.split('photos/')[1]);
-            console.log("Generated URL:", data.publicUrl); // Debug log
+                .getPublicUrl(imageUrl);
             return data.publicUrl;
         } catch (error) {
             console.error("Error processing image URL:", error);
-            return null;
+            return '/placeholder.png';
         }
     };
 
@@ -48,38 +57,44 @@ export default function BookmarksPage() {
 
         try {
             setLoading(true);
-            
-            // Fetch bookmarked projects
-            const { data: bookmarks, error: bookmarksError } = await supabase
+
+            // Updated query to match exact database column names
+            const { data, error } = await supabase
                 .from('bookmarks')
                 .select(`
                     project_id,
-                    projects(*)
+                    projects (
+                        id,
+                        repo_name,
+                        description,
+                        category,
+                        images,
+                        repo_source,
+                        live_demo,
+                        githubusername,
+                        created_at
+                    )
                 `)
                 .eq('user_id', user.id);
 
-            if (bookmarksError) {
-                throw bookmarksError;
+            if (error) {
+                console.error("Supabase query error:", error);
+                throw error;
             }
 
-            console.log("Fetched bookmarks:", bookmarks); // Debug log
+            console.log("Raw bookmarks data:", data);
 
-            if (bookmarks && bookmarks.length > 0) {
-                const formattedProjects = bookmarks.map(bookmark => {
-                    const project = bookmark.projects;
-                    if (project && project.image) {
-                        console.log("Original image URL:", project.image); // Debug log
-                        const processedImageUrl = getImageUrl(project.image);
-                        console.log("Processed image URL:", processedImageUrl); // Debug log
-                        return {
-                            ...project,
-                            image: processedImageUrl
-                        };
-                    }
-                    return project;
-                });
+            if (data && data.length > 0) {
+                const formattedProjects = data
+                    .filter((bookmark): bookmark is BookmarkData =>
+                        bookmark.projects !== null && typeof bookmark.projects === 'object'
+                    )
+                    .map(bookmark => ({
+                        ...bookmark.projects,
+                        images: bookmark.projects.images ? getImageUrl(bookmark.projects.images) : '/placeholder.png'
+                    }));
 
-                console.log("Formatted projects:", formattedProjects); // Debug log
+                console.log("Formatted projects:", formattedProjects);
                 setBookmarkedProjects(formattedProjects);
             } else {
                 setBookmarkedProjects([]);
@@ -94,13 +109,11 @@ export default function BookmarksPage() {
             setLoading(false);
         }
     };
-
     useEffect(() => {
         if (user) {
             fetchBookmarkedProjects();
         }
     }, [user]);
-
     const handleRemoveBookmark = async (projectId: number) => {
         if (!user?.id) return;
 
@@ -152,89 +165,100 @@ export default function BookmarksPage() {
                     {popup.message}
                 </div>
             )}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
-                {bookmarkedProjects.map((project: Project) => {
-                    const tags = project.category ? project.category.split(',').map(tag => tag.trim()) : [];
+            <div className="container mx-auto px-4 py-8">
+                <h1 className="text-2xl font-bold mb-6">Your Bookmarks</h1>
+                {bookmarkedProjects.length === 0 ? (
+                    <div className="text-center py-10">
+                        <p className="text-gray-600">No bookmarks yet</p>
+                    </div>
+                ) : (
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        {bookmarkedProjects.map((project: Project) => {
+                            const tags = project.category ? project.category.split(',').map(tag => tag.trim()) : [];
 
-                    return (
-                        <div 
-                            key={project.id} 
-                            className="bg-white rounded-lg shadow-lg overflow-hidden"
-                        >
-                            <div className="relative h-48 w-full">
-                                {project.image ? (
-                                    <div className="relative w-full h-full">
+                            return (
+                                <div key={project.id} className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+                                    <div className="relative h-48 w-full">
                                         <img
-                                            src={project.image}
+                                            src={project.images || '/placeholder.png'}
                                             alt={project.repo_name}
-                                            className="w-full h-full object-cover"
+                                            className="w-full h-full object-cover transition-opacity duration-300"
                                             onError={(e) => {
-                                                console.error("Image load error for:", project.image); // Debug log
+                                                console.error("Image load error for:", project.images);
                                                 const target = e.target as HTMLImageElement;
                                                 target.src = '/placeholder.png';
+                                                target.classList.add('opacity-75');
                                             }}
                                         />
                                     </div>
-                                ) : (
-                                    <div className="w-full h-full bg-gray-200 flex items-center justify-center">
-                                        <span className="text-gray-400">No image available</span>
-                                    </div>
-                                )}
-                            </div>
-                            <div className="p-4">
-                                <div className="flex justify-between items-center mb-4">
-                                    <h3 className="text-xl font-semibold">{project.repo_name}</h3>
-                                    <div className="flex space-x-2">
-                                        <button
-                                            onClick={() => handleRemoveBookmark(project.id)}
-                                            className="text-blue-500 hover:text-blue-600"
-                                            title="Remove from Bookmarks"
-                                        >
-                                            <i className="fa-solid fa-bookmark"></i>
-                                        </button>
-                                        {project.live_demo && (
-                                            <button
-                                                onClick={() => window.open(project.live_demo, '_blank')}
-                                                className="text-blue-500 hover:text-blue-600"
-                                                title="Go to website"
+                                    <div className="p-4">
+                                        {/* ... card content ... */}
+                                        <div className="flex justify-between items-center mb-4">
+                                            <h3 className="text-xl font-semibold text-gray-800">{project.repo_name}</h3>
+                                            <div className="flex space-x-2">
+                                                <button
+                                                    onClick={() => handleRemoveBookmark(project.id)}
+                                                    className="text-blue-500 hover:text-blue-600 transition-colors duration-200"
+                                                    title="Remove from Bookmarks"
+                                                >
+                                                    <i className="fa-solid fa-bookmark"></i>
+                                                </button>
+                                                {project.live_demo && (
+                                                    <a
+                                                        href={project.live_demo}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        className="text-blue-500 hover:text-blue-600 transition-colors duration-200"
+                                                        title="View Live Demo"
+                                                    >
+                                                        <i className="fa-solid fa-arrow-up-right-from-square"></i>
+                                                    </a>
+                                                )}
+                                            </div>
+                                        </div>
+
+                                        <div className="mb-4">
+                                            <div className="flex flex-wrap gap-2 mb-3">
+                                                {tags.map((tag, index) => (
+                                                    <span
+                                                        key={index}
+                                                        className="px-2 py-1 bg-gray-100 text-sm text-gray-600 rounded-full"
+                                                    >
+                                                        {tag}
+                                                    </span>
+                                                ))}
+                                            </div>
+                                            <p className="text-gray-600 text-sm">
+                                                {project.description}
+                                            </p>
+                                        </div>
+
+                                        <div className="mt-4 flex space-x-3">
+                                            <a
+                                                href={project.repo_source}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="inline-flex items-center px-4 py-2 bg-gray-800 text-white rounded hover:bg-gray-700 transition-colors duration-200"
                                             >
-                                                <i className="fa-solid fa-arrow-up-right-from-square"></i>
-                                            </button>
-                                        )}
-                                    </div>
-                                </div>
-                                
-                                <div className="mb-4">
-                                    <div className="flex flex-wrap gap-2 mb-3">
-                                        {tags.map((tag, index) => (
-                                            <span 
-                                                key={index}
-                                                className="px-2 py-1 bg-gray-100 text-sm text-gray-600 rounded"
+                                                <i className="fa-brands fa-github mr-2"></i>
+                                                Source
+                                            </a>
+                                            <a
+                                                href={`https://github.com/${project.githubusername}`}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="inline-flex items-center px-4 py-2 bg-gray-100 text-gray-700 rounded hover:bg-gray-200 transition-colors duration-200"
                                             >
-                                                {tag}
-                                            </span>
-                                        ))}
+                                                <i className="fa-solid fa-user mr-2"></i>
+                                                {project.githubusername}
+                                            </a>
+                                        </div>
                                     </div>
-                                    <p className="text-gray-600 text-sm">
-                                        {truncateDescription(project.description)}
-                                    </p>
                                 </div>
-                                
-                                <div className="mt-4">
-                                    <a
-                                        href={project.repo_source}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="inline-flex items-center px-4 py-2 bg-gray-800 text-white rounded hover:bg-gray-700 transition-colors"
-                                    >
-                                        <i className="fa-brands fa-github mr-2"></i>
-                                        Source
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    );
-                })}
+                            );
+                        })}
+                    </div>
+                )}
             </div>
         </>
     );
