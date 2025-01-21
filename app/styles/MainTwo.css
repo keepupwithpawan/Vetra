@@ -9,13 +9,13 @@ body {
 
 .gallery-container {
   position: relative;
-  height: 100vh;
+  height: 83vh;
   width: 100%;
-  margin-top: 1vh;
+  margin-top: 5vh;
   background-color: black;
   perspective: 1000px;
   /* overflow: hidden; */
-  overflow: scroll;
+  overflow: hidden;
   opacity: 0.5;
 }
 
@@ -97,6 +97,23 @@ h1 {
   object-fit: contain;
 }
 
+.floating-text {
+  position: absolute;
+  bottom: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  font-family: "General Sans", sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 5px 10px;
+  border-radius: 8px;
+  white-space: nowrap;
+  opacity: 0.9;
+}
+
 .image-1 {
   top: 0%;
   left: 5%;
@@ -150,29 +167,76 @@ h1 {
 }
 
 @keyframes float1 {
-  0%, 100% { transform: translate(0, 0) translateZ(-20px); }
-  50% { transform: translate(-10px, 15px) translateZ(-20px); }
+  0%, 100% {
+    transform: translate(0, 0) translateZ(-20px);
+  }
+  25% {
+    transform: translate(-8px, 12px) translateZ(-18px);
+  }
+  50% {
+    transform: translate(10px, -5px) translateZ(-20px);
+  }
+  75% {
+    transform: translate(-5px, 8px) translateZ(-18px);
+  }
 }
 
 @keyframes float2 {
-  0%, 100% { transform: translate(0, 0) translateZ(-40px); }
-  50% { transform: translate(15px, -10px) translateZ(-40px); }
+  0%, 100% {
+    transform: translate(0, 0) translateZ(-40px);
+  }
+  25% {
+    transform: translate(10px, -5px) translateZ(-35px);
+  }
+  50% {
+    transform: translate(-12px, 7px) translateZ(-40px);
+  }
+  75% {
+    transform: translate(6px, -10px) translateZ(-35px);
+  }
 }
 
 @keyframes float3 {
-  0%, 100% { transform: translate(0, 0) translateZ(-10px); }
-  50% { transform: translate(-15px, -15px) translateZ(-10px); }
+  0%, 100% {
+    transform: translate(0, 0) translateZ(-10px);
+  }
+  25% {
+    transform: translate(-12px, -8px) translateZ(-10px);
+  }
+  50% {
+    transform: translate(15px, 5px) translateZ(-10px);
+  }
+  75% {
+    transform: translate(-8px, -6px) translateZ(-10px);
+  }
 }
 
 @keyframes float4 {
-  0%, 100% { transform: translate(0, 0) translateZ(-30px); }
-  50% { transform: translate(10px, 10px) translateZ(-30px); }
+  0%, 100% {
+    transform: translate(0, 0) translateZ(-30px);
+  }
+  25% {
+    transform: translate(8px, 10px) translateZ(-28px);
+  }
+  50% {
+    transform: translate(-10px, 6px) translateZ(-30px);
+  }
+  75% {
+    transform: translate(6px, -7px) translateZ(-28px);
+  }
 }
 
 @keyframes float5 {
-  0%, 100% { transform: translate(0, 0) translateZ(-25px); }
-  50% { transform: translate(-10px, 15px) translateZ(-25px); }
+  0%, 100% {
+    transform: translate(0, 0) translateZ(-25px);
+  }
+  25% {
+    transform: translate(-10px, 15px) translateZ(-22px);
+  }
+  50% {
+    transform: translate(12px, -8px) translateZ(-25px);
+  }
+  75% {
+    transform: translate(-5px, 10px) translateZ(-22px);
+  }
 }
-
-
-
