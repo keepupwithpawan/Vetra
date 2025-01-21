@@ -1,12 +1,13 @@
 import React, { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useNavigate } from "react-router-dom";
 import "../styles/MainOne.css";
+import CubeVid from "../assets/cube-trans.webm";
 
 export default function MainOne({ onTransition }) {
-  const router = useRouter(); // Changed from navigate to router to match Next.js conventions
+  const navigate = useNavigate(); // Hook for navigation
 
   const handleRedirect = () => {
-    router.push("/signin"); // Changed from navigate to router.push
+    navigate("/home"); // Redirect to /home
   };
 
   const [isTransitioning, setIsTransitioning] = useState(false);
@@ -17,7 +18,7 @@ export default function MainOne({ onTransition }) {
     if (e.deltaY > 0) {
       setIsTransitioning(true);
       setTimeout(() => {
-        if (onTransition) onTransition();
+        if (onTransition) onTransition(); // Ensure onTransition is called if defined
       }, 1500);
     }
   };
@@ -28,31 +29,17 @@ export default function MainOne({ onTransition }) {
       className={`main-one ${isTransitioning ? "transitioning" : ""}`}
       onWheel={handleScroll}
     >
-      <div id="lander" className={isTransitioning ? "fade-out" : ""}>
-        <p id="heading">Discovery Engine for Developers</p>
-        <p id="sub-heading">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque
-          consectetur quos voluptas eius autem soluta!
-        </p>
-        <button 
-          onClick={handleRedirect}
-          className="px-6 py-2  text-black bg-white rounded-lg transition-colors"
-        >
-          Get Started
-        </button>
-      </div>
+      <div id="lander-container">
+        <div id="lander-img">
 
-      <div id="cube" className={isTransitioning ? "zoom" : ""}>
-        <video
-          className="w-[450px] h-[450px] object-cover"
-          autoPlay
-          muted
-          loop
-          playsInline
-        >
-          <source src="/assets/cube-trans.webm" type="video/webm" />
-          Your browser does not support the video tag.
-        </video>
+        </div>
+        <div id="lander" className={isTransitioning ? "fade-out" : ""}>
+          <p id="heading">From Exploration to Execution</p>
+          <p id="sub-heading">
+            Discover designs, explore source code, and customize instantly. Vetra makes your ideas actionable!
+          </p>
+          <button onClick={handleRedirect}>Get Started</button>
+        </div>
       </div>
     </div>
   );
