@@ -1,103 +1,92 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import "./styles/Grid.css";
 import FullScreenOverlay from "./components/FullScreenOverlay";
 import supabase from "@/utils/SupabaseClient";
-import Image from "next/image";
 
-interface ProjectImage {
-  src: string;
-  repo_name: string;
+interface Project {
+  id: number;
+  created_at: string;
+  live_demo: string;
+  category: string;
+  githubusername: string;
   description: string;
+  repo_name: string;
+  repo_source: string;
+  bookmark_status: boolean;
+  images: string;
 }
 
 export default function Grid() {
   const router = useRouter();
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
-  const [description, setDescription] = useState<string | null>(null);
   const [isClosing, setIsClosing] = useState(false);
-  const [images, setImages] = useState<ProjectImage[]>([]);
-  const [activedescription, setActivedescription] = useState<string | null>(null);
-
-
-
-  const openOverlay = (image: string, description: string) => {
-    setIsClosing(false);
-    setSelectedImage(image);
-    setActivedescription(description);
-  };
-
-  const closeOverlay = () => {
-    setIsClosing(true);
-    setTimeout(() => {
-      setSelectedImage(null);
-      setDescription(null);
-      setIsClosing(false);
-    }, 500);
-  };
+  const [projects, setProjects] = useState<Project[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    handleSearch();
+    fetchProjects();
   }, []);
 
-  const handleSearch = async () => {
+  const fetchProjects = async () => {
     try {
-      const { data, error } = await supabase.from("projects").select("images, repo_name, description");
+      const { data, error } = await supabase
+        .from('projects')
+        .select('*')
+        .order('created_at', { ascending: false });
 
       if (error) {
-        console.error("Error fetching data:", error.message);
-        return;
+        throw error;
       }
 
       if (data) {
-        // Map the fetched data to match the `ProjectImage` format
-        const formattedImages = data.map((item: { images: string; repo_name: string; description: string }) => ({
-          src: item.images,
-          repo_name: item.repo_name,
-          description: item.description
-        }));
-        setImages(formattedImages);
-
-        console.log("formattedImages", formattedImages);
-
-
+        console.log('Fetched projects:', data); // Debug log
+        // Filter out projects without images
+        const filteredProjects = data.filter(project => project.images);
+        console.log('Filtered projects:', filteredProjects); // Debug log
+        setProjects(filteredProjects);
       }
-    } catch (err) {
-      console.error("Unexpected error:", err);
+    } catch (error) {
+      console.error('Error fetching projects:', error);
+    } finally {
+      setLoading(false);
     }
   };
 
   const handleImageClick = (repoName: string) => {
-    router.push(`/info?repo_name=${repoName}`);
+    console.log('Navigating to project:', repoName); // Debug log
+    // Add a small delay to ensure the console log is visible
+    setTimeout(() => {
+      router.push(`/info?repo_name=${repoName}`);
+    }, 100);
   };
+  if (loading) {
+    return <div className="scrollable-container">Loading projects...</div>;
+  }
 
   return (
     <>
       <div className="scrollable-container">
-
         <div className="pinterest-grid">
-          {images.map((project, index) => (
-            <div className="grid-item" key={index}>
-              <Image
-                src={project.src}
-                alt={`Project ${project.repo_name}`}
-                width={200}
-                height={200}
-                className="object-cover"
+          {projects.map((project) => (
+            <div className="grid-item" key={project.id}>
+              <img 
+                src={project.images} 
+                alt={`Project ${project.repo_name}`} 
               />
               <div className="overlay">
-                <button
+                <button 
                   className="overlay-btn"
                   onClick={(e) => {
                     e.stopPropagation();
-                    openOverlay(project.src, project.description);
+                    openOverlay(project.images);
                   }}
                   title="View Image"
                 >
                   <i className="fa-solid fa-eye"></i>
                 </button>
-                <button
+                <button 
                   className="overlay-btn"
                   onClick={(e) => {
                     e.stopPropagation();
@@ -117,7 +106,8 @@ export default function Grid() {
         <FullScreenOverlay
           image={selectedImage}
           onClose={closeOverlay}
-          isClosing={isClosing} description={activedescription} />
+          isClosing={isClosing}
+        />
       )}
     </>
   );
