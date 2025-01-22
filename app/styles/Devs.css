@@ -1,0 +1,94 @@
+/* General container styling */
+#devs-container {
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow-x: hidden;
+}
+
+#devs-container > #devs-img {
+    width: 0%; /* Start with no width */
+    height: 65vh;
+    background-color: white;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+#devs-container > #devs-img.pop-animation {
+    animation: smoothBounce 1.4s cubic-bezier(0.65, 0.05, 0.36, 1) forwards; /* Adjusted easing for better smoothness */
+}
+
+#devs-container > #devs-img > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+/* Text container styling */
+#text-container {
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
+    padding: 20px;
+}
+
+.gradient-text {
+    font-family: 'General-Sans', sans-serif;
+    background: linear-gradient(to bottom, white 0%, black 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    font-size: 200px;
+    font-weight: bold;
+}
+
+/* Info container */
+#devs-info {
+    width: 80%;
+    margin-bottom: 40px;
+    padding: 40px;
+    font-size: 20px;
+    background-color: white;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 10px;
+}
+
+#devs-info > p {
+    align-self: flex-end;
+}
+
+/* Footer styles */
+.devs-span {
+    font-weight: bold;
+    color: #933EFF;
+}
+
+/* Bounce animation for the horizontal pop effect */
+@keyframes smoothBounce {
+    0% {
+        width: 0%;    /* Start at 0% width */
+    }
+    50% {
+        width: 90%;   /* Expand to near-final size smoothly */
+    }
+    70% {
+        width: 85%;   /* Settle closer to the final width */
+    }
+    85% {
+        width: 85%;   /* Slight outward bounce */
+    }
+    100% {
+        width: 85%;   /* Final resting width */
+    }
+}
