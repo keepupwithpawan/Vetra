@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import "../styles/Info.css";
 import NavbarHome from "../components/NavbarHome";
-import Grid, { projectImages } from "../Grid";
+import Grid from "../Grid";
 import Image from "next/image";
 import loader from "../../public/assets/spinner.png";
 import Popup from "../components/Popup";
@@ -19,7 +19,7 @@ interface Project {
   category: string;
   repo_name: string;
   repo_source: string;
-  display_image?: string;
+  images: string;  // Added this field
 }
 
 interface PopupState {
@@ -49,12 +49,7 @@ export default function Info() {
 
         if (projectError) throw projectError;
 
-        const projectImage = projectImages.find((img: { repo_name: string; src: string }) => img.repo_name === repoName);
-
-        setProject({
-          ...projectData,
-          display_image: projectImage?.src
-        } as Project);
+        setProject(projectData as Project);
 
         // Check if project is bookmarked
         if (user?.id && projectData.id) {
@@ -168,13 +163,13 @@ export default function Info() {
       <div id="info-wrapper">
         <div id="info-container">
           <div id="banner">
-            {project.display_image && (
-              <img
-                src={project.display_image}
+            {project?.images && (  // Use project.images directly
+              <img 
+                src={project.images}  // Use the images field from your project data
                 alt={project.repo_name}
-                style={{
-                  width: '100%',
-                  height: '100%',
+                style={{ 
+                  width: '100%', 
+                  height: '100%', 
                   objectFit: 'cover'
                 }}
               />
