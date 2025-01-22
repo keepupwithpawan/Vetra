@@ -9,6 +9,7 @@ const SearchBar = () => {
         id: number;
         name: string;
         images: string;
+        detail: (string | string[])[] | null; // Make detail nullable
     }
 
     const [results, setResults] = useState<Project[]>([]);
@@ -21,43 +22,65 @@ const SearchBar = () => {
         }
 
         try {
-            // Perform a text search on the 'keywords_color' column
             const { data, error } = await supabase
                 .from('projects')
-                .select()
-                .textSearch('color', query, {
-                    type: 'websearch', // Optional: Use websearch for more natural language search
-                    config: 'english', // Optional: Specify language configuration
-                });
+                .select('*');
 
             if (error) {
                 console.error('Error searching:', error.message);
                 return;
             }
 
-            if (!data || data.length === 0) {
+            // Custom filtering for nested arrays with null checking
+            const filteredData = data?.filter(project => {
+                // Check if detail exists and is an array
+                if (!project.detail || !Array.isArray(project.detail)) {
+                    return false;
+                }
+
+                return project.detail.some(item => {
+                    if (item === null) return false;
+
+                    if (Array.isArray(item)) {
+                        // Search within nested arrays
+                        return item.some(subItem =>
+                            subItem?.toLowerCase().includes(query.toLowerCase())
+                        );
+                    } else {
+                        // Search within string
+                        return item?.toLowerCase().includes(query.toLowerCase());
+                    }
+                });
+            });
+
+            if (!filteredData || filteredData.length === 0) {
                 console.info('No results found for the query:', query);
-                setResults([]); // Clear results if no data found
-                setImage(''); // Clear image if no results
+                setResults([]);
+                setImage('');
                 return;
             }
 
-            // Set results to the fetched data
-            setResults(data);
+            setResults(filteredData);
 
-            // Assuming 'images' field holds URLs or paths to images
-            if (data[0]?.images) {
-                setImage(data[0].images); // Update with the first image URL/path
+            if (filteredData[0]?.images) {
+                setImage(filteredData[0].images);
             } else {
-                setImage(''); // Clear image if no valid image is found
+                setImage('');
             }
 
-            console.log('Search results:', data);
+            console.log('Search results:', filteredData);
         } catch (err) {
             console.error('Unexpected error during search:', err);
         }
     };
 
+    const renderDetailItem = (item: string | string[] | null) => {
+        if (item === null) return '';
+        if (Array.isArray(item)) {
+            return item.filter(Boolean).join(', ');
+        }
+        return item;
+    };
 
     return (
         <div>
@@ -65,6 +88,7 @@ const SearchBar = () => {
                 <input
                     type="text"
                     value={query}
+                    className='text-black'
                     onChange={(e) => setQuery(e.target.value)}
                     placeholder="Search..."
                     style={{
@@ -96,17 +120,22 @@ const SearchBar = () => {
                     <ul>
                         {results.map((item, index) => (
                             <li key={index} className='text-white'>
-                                {/* Display image if available */}
+                                <h3>{item.name}</h3>
+                                <div>
+                                    {item.detail?.map((detailItem, detailIndex) => (
+                                        <p key={detailIndex}>
+                                            {renderDetailItem(detailItem)}
+                                        </p>
+                                    ))}
+                                </div>
                                 {item.images && (
-                                    <>
-                                        <Image
-                                            alt="Project Image"
-                                            src={item.images} // Use image URL here
-                                            width={200}
-                                            height={200}
-                                            className='w-auto h-auto'
-                                        />
-                                    </>
+                                    <Image
+                                        alt="Project Image"
+                                        src={item.images}
+                                        width={200}
+                                        height={200}
+                                        className='w-auto h-auto'
+                                    />
                                 )}
                             </li>
                         ))}
