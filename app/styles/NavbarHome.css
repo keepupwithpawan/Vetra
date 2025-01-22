@@ -75,17 +75,38 @@ input, textarea {
     border-radius: 12px;
   }
   
-   #navHome > #floating-barHome > #right > ul {
+  #navHome > #floating-barHome > #right > ul {
     background: none;
     width: 100%;
     height: 100%;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end; /* Changed from space-between */
+    align-items: center;
     list-style: none;
-  }
-  
-   #navHome > #floating-barHome > #right > ul > li {
-    cursor: pointer;
-    background: none;
-  }
-  
+    gap: 24px; /* Adds consistent spacing */
+}
+
+#navHome > #floating-barHome > #right > ul > li.profile-button {
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.082);
+    border-radius: 50%;
+    transition: all 0.2s ease;
+    padding: 2px;
+    margin-left: 8px;
+}
+
+#navHome > #floating-barHome > #right > ul > li.profile-button:hover {
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 0 15px rgba(147, 62, 255, 0.3);
+}
+
+/* Add these new styles */
+#navHome > #floating-barHome > #right > ul > li {
+    opacity: 0.8;
+    transition: opacity 0.2s ease;
+}
+
+#navHome > #floating-barHome > #right > ul > li:hover {
+    opacity: 1;
+}
