@@ -1,12 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSignIn } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Eye, EyeOff } from "lucide-react";
 import Image from "next/image";
-import VetraV from "../../public/assets/Vetra-V.jpg";
 import VetraLogo from "../../public/assets/Vetra-Logo.png";
 import "./SignIn.css";
 
@@ -17,25 +16,25 @@ export default function SignIn() {
     const [error, setError] = useState("");
     const [showPassword, setShowPassword] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
+    const [videoError, setVideoError] = useState(false);
     const router = useRouter();
 
     if (!isLoaded) {
         return null;
     }
 
+
     const handleOAuthSignIn = async (strategy: "oauth_google" | "oauth_github", provider: string) => {
         try {
             setIsLoading(true);
             setError("");
 
-            // First attempt to verify if user exists using email/password sign-in
             try {
                 const verification = await signIn.create({
                     strategy: "oauth_" + provider,
                     identifier: "",
                 });
 
-                // If we get here, user doesn't exist
                 setError(`No account found. Please sign up first.`);
                 setTimeout(() => {
                     router.push("/sign-up");
@@ -43,7 +42,6 @@ export default function SignIn() {
                 return;
 
             } catch (verificationErr: any) {
-                // If we get a specific error about the user not existing
                 if (verificationErr.errors?.[0]?.code === "form_identifier_not_found") {
                     setError(`No account found. Please sign up first.`);
                     setTimeout(() => {
@@ -52,7 +50,6 @@ export default function SignIn() {
                     return;
                 }
                 
-                // If we get here, attempt the OAuth flow
                 await signIn.authenticateWithRedirect({
                     strategy,
                     redirectUrl: `${window.location.origin}/sso-callback`,
@@ -113,17 +110,21 @@ export default function SignIn() {
         }
     }
 
-
     return (
         <div id="sign-in-container">
-            <div id="video-container">
-                <div id="video-content">
-                    <Image src={VetraV} alt="Floating 7" width={500} height={500} />
-                </div>
-            </div>
+            <Image 
+                src="/assets/Sign-in Video.mp4"
+                alt="Vetra Background" 
+                fill 
+                style={{
+                    objectFit: 'cover', 
+                    zIndex: -1, 
+                    position: 'absolute'
+                }}
+            />
 
             <div id="auth-container">
-                <Image src={VetraLogo} alt="Floating 7" width={500} height={500} />
+                <Image src={VetraLogo} alt="Vetra Logo" width={500} height={500} />
                 <form id="auth-box" onSubmit={submit}>
                     <div id="our-creds">
                         <input

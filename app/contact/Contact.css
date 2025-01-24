@@ -1,0 +1,109 @@
+#contact-container {
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    background-color: black;
+}
+
+#contact {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10vh 0;
+    width: 90%;
+    height: 70%;
+    background: black;
+    border-radius: 10px;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+#info-container {
+    width: 49%;
+    height: 50vh;
+    display: flex;
+    align-items: center;
+    background: url('../../public/assets/Contact.jpg') center; 
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#form-container {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+    margin-left: 10px;
+}
+
+#contact-form {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#form-fields input,
+#form-fields textarea {
+    font-family: 'General Sans', sans-serif;
+    width: 90%;
+    margin-bottom: 30px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.082);
+    font-size: 12px;
+    font-weight: bold;
+    color: white;
+    border: none;
+    border-radius: 10px;
+}
+
+#form-fields input, #form-fields textarea:focus {
+    outline: none;
+  }
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active{
+    outline: none;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: white;
+    transition: background-color 5000s ease-in-out 0s;
+    box-shadow: inset 0 0 20px 20px #23232329;
+}
+
+#form-fields input:focus,
+#form-fields textarea:focus {
+    border-color: #007bff;
+}
+
+#send-btn {
+    cursor: pointer;
+    width: 100%;
+    padding: 20px;
+    background-color: white;
+    color: black;
+    font-weight: bold;
+    border-radius: 10px;
+    transition: opacity 0.5s ease, border-radius 0.5s ease;
+}
+
+#send-btn:hover {
+    opacity: 70%;
+    border-radius: 50px;
+}
+
+#contact-footer {
+    width: 100vw;
+    height: 35vh;
+    overflow: hidden;
+}
+

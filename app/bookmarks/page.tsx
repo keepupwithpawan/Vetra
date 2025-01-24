@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { useUser } from '@clerk/clerk-react';
 import supabase from '@/utils/SupabaseClient';
 import NavbarHome from '../components/NavbarHome';
+import "./Bookmark.css"  // Import the CSS file
 
 // Updated interface to match exact database column names
 interface Project {
@@ -14,7 +15,7 @@ interface Project {
     images?: string;
     repo_source: string;
     live_demo: string;
-    githubusername: string;  // Changed from github_username to githubusername
+    githubusername: string;
     created_at: string;
 }
 
@@ -58,7 +59,6 @@ export default function BookmarksPage() {
         try {
             setLoading(true);
 
-            // Updated query to match exact database column names
             const { data, error } = await supabase
                 .from('bookmarks')
                 .select(`
@@ -82,8 +82,6 @@ export default function BookmarksPage() {
                 throw error;
             }
 
-            console.log("Raw bookmarks data:", data);
-
             if (data && data.length > 0) {
                 const formattedProjects = data
                     .filter((bookmark): bookmark is BookmarkData =>
@@ -94,7 +92,6 @@ export default function BookmarksPage() {
                         images: bookmark.projects.images ? getImageUrl(bookmark.projects.images) : '/placeholder.png'
                     }));
 
-                console.log("Formatted projects:", formattedProjects);
                 setBookmarkedProjects(formattedProjects);
             } else {
                 setBookmarkedProjects([]);
@@ -109,11 +106,13 @@ export default function BookmarksPage() {
             setLoading(false);
         }
     };
+
     useEffect(() => {
         if (user) {
             fetchBookmarkedProjects();
         }
     }, [user]);
+
     const handleRemoveBookmark = async (projectId: number) => {
         if (!user?.id) return;
 
@@ -151,8 +150,8 @@ export default function BookmarksPage() {
 
     if (loading) {
         return (
-            <div className="flex justify-center items-center min-h-screen">
-                <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-blue-500"></div>
+            <div className="loading">
+                <div className="loading-spinner"></div>
             </div>
         );
     }
@@ -161,44 +160,42 @@ export default function BookmarksPage() {
         <>
             <NavbarHome />
             {popup.visible && (
-                <div className="fixed top-4 right-4 bg-blue-500 text-white px-6 py-3 rounded-lg shadow-lg z-50">
+                <div className="popup">
                     {popup.message}
                 </div>
             )}
-            <div className="container mx-auto px-4 py-8">
+            <div className="container">
                 <h1 className="text-2xl font-bold mb-6">Your Bookmarks</h1>
                 {bookmarkedProjects.length === 0 ? (
-                    <div className="text-center py-10">
-                        <p className="text-gray-600">No bookmarks yet</p>
+                    <div className="no-bookmarks">
+                        <p className="no-bookmarks-text">No bookmarks yet</p>
                     </div>
                 ) : (
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div className="grid">
                         {bookmarkedProjects.map((project: Project) => {
                             const tags = project.category ? project.category.split(',').map(tag => tag.trim()) : [];
 
                             return (
-                                <div key={project.id} className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
-                                    <div className="relative h-48 w-full">
+                                <div key={project.id} className="card">
+                                    <div className="card-image-container">
                                         <img
                                             src={project.images || '/placeholder.png'}
                                             alt={project.repo_name}
-                                            className="w-full h-full object-cover transition-opacity duration-300"
+                                            className="card-image"
                                             onError={(e) => {
-                                                console.error("Image load error for:", project.images);
                                                 const target = e.target as HTMLImageElement;
                                                 target.src = '/placeholder.png';
                                                 target.classList.add('opacity-75');
                                             }}
                                         />
                                     </div>
-                                    <div className="p-4">
-                                        {/* ... card content ... */}
-                                        <div className="flex justify-between items-center mb-4">
-                                            <h3 className="text-xl font-semibold text-gray-800">{project.repo_name}</h3>
-                                            <div className="flex space-x-2">
+                                    <div className="card-content">
+                                        <div className="card-header">
+                                            <h3 className="card-title">{project.repo_name}</h3>
+                                            <div className="card-actions">
                                                 <button
                                                     onClick={() => handleRemoveBookmark(project.id)}
-                                                    className="text-blue-500 hover:text-blue-600 transition-colors duration-200"
+                                                    className="card-action-btn"
                                                     title="Remove from Bookmarks"
                                                 >
                                                     <i className="fa-solid fa-bookmark"></i>
@@ -208,7 +205,7 @@ export default function BookmarksPage() {
                                                         href={project.live_demo}
                                                         target="_blank"
                                                         rel="noopener noreferrer"
-                                                        className="text-blue-500 hover:text-blue-600 transition-colors duration-200"
+                                                        className="card-action-btn"
                                                         title="View Live Demo"
                                                     >
                                                         <i className="fa-solid fa-arrow-up-right-from-square"></i>
@@ -217,28 +214,26 @@ export default function BookmarksPage() {
                                             </div>
                                         </div>
 
-                                        <div className="mb-4">
-                                            <div className="flex flex-wrap gap-2 mb-3">
-                                                {tags.map((tag, index) => (
-                                                    <span
-                                                        key={index}
-                                                        className="px-2 py-1 bg-gray-100 text-sm text-gray-600 rounded-full"
-                                                    >
-                                                        {tag}
-                                                    </span>
-                                                ))}
-                                            </div>
-                                            <p className="text-gray-600 text-sm">
-                                                {project.description}
-                                            </p>
+                                        <div className="tag-container">
+                                            {tags.map((tag, index) => (
+                                                <span
+                                                    key={index}
+                                                    className="tag"
+                                                >
+                                                    {tag}
+                                                </span>
+                                            ))}
                                         </div>
+                                        <p className="description">
+                                            {project.description}
+                                        </p>
 
-                                        <div className="mt-4 flex space-x-3">
+                                        <div className="btn-container">
                                             <a
                                                 href={project.repo_source}
                                                 target="_blank"
                                                 rel="noopener noreferrer"
-                                                className="inline-flex items-center px-4 py-2 bg-gray-800 text-white rounded hover:bg-gray-700 transition-colors duration-200"
+                                                className="source-btn"
                                             >
                                                 <i className="fa-brands fa-github mr-2"></i>
                                                 Source
@@ -247,7 +242,7 @@ export default function BookmarksPage() {
                                                 href={`https://github.com/${project.githubusername}`}
                                                 target="_blank"
                                                 rel="noopener noreferrer"
-                                                className="inline-flex items-center px-4 py-2 bg-gray-100 text-gray-700 rounded hover:bg-gray-200 transition-colors duration-200"
+                                                className="profile-btn"
                                             >
                                                 <i className="fa-solid fa-user mr-2"></i>
                                                 {project.githubusername}
