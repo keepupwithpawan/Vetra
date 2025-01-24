@@ -15,7 +15,7 @@ const BookTextIcon = () => {
         animate={controls}
         variants={{
           animate: {
-            scale: [2, 2.04, 2],
+            scale: [1, 1.04, 1],
             rotate: [0, -8, 8, -8, 0],
             y: [0, -2, 0],
             transition: {
@@ -25,7 +25,7 @@ const BookTextIcon = () => {
             },
           },
           normal: {
-            scale: 2,
+            scale: 1,
             rotate: 0,
             y: 0,
           },

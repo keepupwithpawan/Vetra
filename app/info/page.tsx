@@ -8,7 +8,7 @@ import loader from "../../public/assets/spinner.png";
 import Popup from "../components/Popup";
 import supabase from "@/utils/SupabaseClient";
 import { useSearchParams } from "next/navigation";
-import { useUser } from '@clerk/clerk-react';
+import { useUser } from "@clerk/clerk-react";
 
 interface Project {
   id: number;
@@ -19,7 +19,7 @@ interface Project {
   category: string;
   repo_name: string;
   repo_source: string;
-  images: string;  // Added this field
+  images: string; // Added this field
 }
 
 interface PopupState {
@@ -41,6 +41,8 @@ export default function Info() {
       try {
         if (!repoName) return;
 
+        setLoading(true); // Set loading state
+
         const { data: projectData, error: projectError } = await supabase
           .from("projects")
           .select("*")
@@ -54,83 +56,31 @@ export default function Info() {
         // Check if project is bookmarked
         if (user?.id && projectData.id) {
           const { data: bookmark } = await supabase
-            .from('bookmarks')
-            .select('*')
-            .eq('user_id', user.id)
-            .eq('project_id', projectData.id)
+            .from("bookmarks")
+            .select("*")
+            .eq("user_id", user.id)
+            .eq("project_id", projectData.id)
             .single();
 
           setIsBookmarked(!!bookmark);
         }
-
       } catch (error) {
         console.error("Error fetching project:", error);
       } finally {
-        setLoading(false);
+        setLoading(false); // Reset loading state
+        window.scrollTo({ top: 0, behavior: "smooth" }); // Scroll to the top
       }
     };
 
     fetchProjectData();
   }, [repoName, user]);
 
-  const handleBookmarkToggle = async () => {
-    if (!user) {
-      setPopup({
-        message: "Please log in to bookmark projects",
-        visible: true
-      });
-      return;
-    }
-
-    if (!project) return;
-
-    try {
-      if (isBookmarked) {
-        // Remove bookmark
-        const { error } = await supabase
-          .from('bookmarks')
-          .delete()
-          .eq('user_id', user.id)
-          .eq('project_id', project.id);
-
-        if (error) throw error;
-
-        setIsBookmarked(false);
-        setPopup({
-          message: "Removed from bookmarks",
-          visible: true
-        });
-      } else {
-        // Add bookmark
-        const { error } = await supabase
-          .from('bookmarks')
-          .insert({
-            user_id: user.id,
-            project_id: project.id,
-            created_at: new Date().toISOString()
-          });
-
-        if (error) throw error;
-
-        setIsBookmarked(true);
-        setPopup({
-          message: "Added to bookmarks!",
-          visible: true
-        });
-      }
-    } catch (error) {
-      console.error("Error toggling bookmark:", error);
-      setPopup({
-        message: "Error updating bookmark",
-        visible: true
-      });
-    }
-
-    setTimeout(() => setPopup({ message: "", visible: false }), 3000);
-  };
-
   if (loading) {
-    return <div id="loading"><Image src={loader} alt="Loading..." /></div>;
+    return (
+      <div id="loading">
+        <Image src={loader} alt="Loading..." />
+      </div>
+    );
   }
 
   if (!project) {
@@ -146,13 +96,13 @@ export default function Info() {
 
   const handleLiveDemoRedirect = () => {
     if (project.live_demo) {
-      window.open(project.live_demo, '_blank');
+      window.open(project.live_demo, "_blank");
     }
   };
 
   const handleRepoSourceRedirect = () => {
     if (project.repo_source) {
-      window.open(project.repo_source, '_blank');
+      window.open(project.repo_source, "_blank");
     }
   };
 
@@ -163,14 +113,14 @@ export default function Info() {
       <div id="info-wrapper">
         <div id="info-container">
           <div id="banner">
-            {project?.images && (  // Use project.images directly
-              <img 
-                src={project.images}  // Use the images field from your project data
+            {project?.images && (
+              <img
+                src={project.images}
                 alt={project.repo_name}
-                style={{ 
-                  width: '100%', 
-                  height: '100%', 
-                  objectFit: 'cover'
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
                 }}
               />
             )}
@@ -182,10 +132,14 @@ export default function Info() {
                 <div
                   id="collection"
                   className="info-btn"
-                  title={isBookmarked ? "Remove from Bookmarks" : "Add to Bookmarks"}
-                  onClick={handleBookmarkToggle}
+                  title={
+                    isBookmarked ? "Remove from Bookmarks" : "Add to Bookmarks"
+                  }
+                  onClick={() => {}}
                 >
-                  <i className={`fa-${isBookmarked ? "solid" : "regular"} fa-bookmark`}></i>
+                  <i
+                    className={`fa-${isBookmarked ? "solid" : "regular"} fa-bookmark`}
+                  ></i>
                 </div>
                 {project.live_demo && (
                   <div

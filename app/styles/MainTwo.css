@@ -3,10 +3,6 @@
   padding: 0;
 }
 
-body {
-  overflow: hidden;
-}
-
 .gallery-container {
   position: relative;
   height: 83vh;
@@ -14,7 +10,6 @@ body {
   margin-top: 5vh;
   background-color: black;
   perspective: 1000px;
-  /* overflow: hidden; */
   overflow: hidden;
   opacity: 0.5;
 }

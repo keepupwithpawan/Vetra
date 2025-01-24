@@ -1,4 +1,4 @@
-import './About.css';
+import './about.css';
 import { BookTextIcon } from './components/BookTextIcon';
 import { LayoutPanelTopIcon } from './components/LayoutPanelTopIcon.jsx';
 import { SearchIcon } from './components/SearchIcon.jsx';

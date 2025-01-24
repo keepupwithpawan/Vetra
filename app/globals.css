@@ -19,7 +19,7 @@ body {
   background-color: black;
   color: white;
   font-family: "General Sans", sans-serif;
-  overflow: hidden;
+  overflow-y: hidden;
 }
 
 .fade-overlay {

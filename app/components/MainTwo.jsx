@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../styles/MainTwo.css";
 import image1 from '../../public/assets/image1.jpg';
-import Image from 'next/image';
-
+import Image from "next/image";
 
 export default function MainTwo() {
   const [tagText, setTagText] = useState("get inspired");
@@ -28,31 +27,31 @@ export default function MainTwo() {
   }, []);
 
   const images = [
-    // {
-    //   src: "https://pawan-kamat-portfolio.vercel.app/images/GitaGPT-Home.png",
-    //   depth: 20,
-    //   text: "Explore AI Tools",
-    // },
-    // {
-    //   src: "https://pawan-kamat-portfolio.vercel.app/images/WebStyle-Home.png",
-    //   depth: 40,
-    //   text: "Design Better Websites",
-    // },
-    // {
-    //   src: "https://github.com/bryanleezh/www/raw/master/images/demo/main.png",
-    //   depth: 10,
-    //   text: "Discover Live Previews",
-    // },
-    // {
-    //   src: "https://pawan-kamat-portfolio.vercel.app/images/Breather-Home.png",
-    //   depth: 30,
-    //   text: "Collaborate Effortlessly",
-    // },
-    // {
-    //   src: "https://github.com/Yuteoctober/wins95Portfolio/raw/main/src/assets/markdown.png?raw=true",
-    //   depth: 25,
-    //   text: "Markdown in Style",
-    // },
+    {
+      src: "https://pawan-kamat-portfolio.vercel.app/images/GitaGPT-Home.png",
+      depth: 20,
+      text: "Explore AI Tools",
+    },
+    {
+      src: "https://pawan-kamat-portfolio.vercel.app/images/WebStyle-Home.png",
+      depth: 40,
+      text: "Design Better Websites",
+    },
+    {
+      src: "https://github.com/bryanleezh/www/raw/master/images/demo/main.png",
+      depth: 10,
+      text: "Discover Live Previews",
+    },
+    {
+      src: "https://pawan-kamat-portfolio.vercel.app/images/Breather-Home.png",
+      depth: 30,
+      text: "Collaborate Effortlessly",
+    },
+    {
+      src: "https://github.com/Yuteoctober/wins95Portfolio/raw/main/src/assets/markdown.png?raw=true",
+      depth: 25,
+      text: "Markdown in Style",
+    },
     {
       src: "https://kmkzzsqbmjarjzfpopin.supabase.co/storage/v1/object/sign/photos/andrijaweb.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJwaG90b3MvYW5kcmlqYXdlYi5wbmciLCJpYXQiOjE3MzY4NDkyNDQsImV4cCI6MTc2ODM4NTI0NH0.Jguj3KLkcM5SozoqxQu2a-iooA1ROCucyp-YG5UR_UU&t=2025-01-14T10%3A07%3A26.099Z",
       depth: 25,
@@ -85,7 +84,7 @@ export default function MainTwo() {
                 className={`floating-image image-${index + 1}`}
                 data-depth={img.depth}
               >
-                <Image src={img.src} alt={`Floating ${index + 1}`} width={100} height={100} />
+                <img src={img.src} alt={`Floating ${index + 1}`} width={100} height={100} />
                 {/* <div className="floating-text">{img.text}</div> */}
               </div>
             ))}

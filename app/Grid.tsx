@@ -80,16 +80,6 @@ export default function Grid() {
                   className="overlay-btn"
                   onClick={(e) => {
                     e.stopPropagation();
-                    openOverlay(project.images);
-                  }}
-                  title="View Image"
-                >
-                  <i className="fa-solid fa-eye"></i>
-                </button>
-                <button 
-                  className="overlay-btn"
-                  onClick={(e) => {
-                    e.stopPropagation();
                     handleImageClick(project.repo_name);
                   }}
                   title="View Details"
@@ -101,14 +91,6 @@ export default function Grid() {
           ))}
         </div>
       </div>
-
-      {selectedImage && (
-        <FullScreenOverlay
-          image={selectedImage}
-          onClose={closeOverlay}
-          isClosing={isClosing}
-        />
-      )}
     </>
   );
 }

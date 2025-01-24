@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import {useRouter} from "next/navigation"
+import { useRouter } from "next/navigation"
 import "../styles/MainOne.css";
+import LanderVideo from "../../public/assets/Lander-Shapes.mp4"
 
 
 export default function MainOne({ onTransition }) {
@@ -30,9 +31,9 @@ export default function MainOne({ onTransition }) {
       onWheel={handleScroll}
     >
       <div id="lander-container">
-        <div id="lander-img">
+        {/* Video as background */}
+        <video src="https://res.cloudinary.com/dwkbeovcw/video/upload/v1737741388/Lander-Shapes_pz1wv4.mp4" autoPlay muted loop></video>
 
-        </div>
         <div id="lander" className={isTransitioning ? "fade-out" : ""}>
           <p id="heading">From Exploration to Execution</p>
           <p id="sub-heading">

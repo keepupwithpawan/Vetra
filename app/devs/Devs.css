@@ -1,0 +1,185 @@
+/* General container styling */
+body, html {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+#devs-container {
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: visible;
+}
+
+#devs-container > #devs-img {
+  width: 85%; 
+  height: 65vh;
+  background-color: white;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+#devs-container > #devs-img.pop-animation {
+  animation: smoothBounce 1.4s cubic-bezier(0.65, 0.05, 0.36, 1) forwards;
+}
+
+#devs-container > #devs-img > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+/* Text container styling */
+#text-container {
+  width: 100%;
+  text-align: center;
+  margin-top: 20px;
+  padding: 20px;
+}
+
+.gradient-text {
+  font-family: 'General-Sans', sans-serif;
+  background: linear-gradient(to bottom, white 0%, black 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  font-size: 200px;
+  font-weight: bold;
+}
+
+/* Info container */
+#devs-info {
+  width: 80%;
+  margin-bottom: 60px;
+  padding: 40px;
+  font-size: 20px;
+  background-color: white;
+  color: black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 10px;
+}
+
+#devs-info > p {
+  align-self: flex-end;
+}
+
+/* Footer styles */
+#about-footer {
+  width: 100vw;
+  height: 35vh;
+  overflow: hidden;
+}
+
+/* Bottom section */
+#bottom {
+width: 100%;
+height: 50vh;
+border-radius: 30px 30px 0 0;
+background: white;
+color: black;
+box-shadow:
+  0 0 40px rgba(255, 255, 255, 0.2), /* Intensified glow */
+  0 0 50px rgba(255, 255, 255, 0.2),
+  0 0 60px rgba(255, 255, 255, 0.2),
+  0 0 7px rgba(255, 255, 255, 0.2);
+}
+
+/* Styling for the top part of the bottom section */
+#bottom > #bottom-t {
+width: 70%;
+height: 35%;
+display: flex;
+flex-direction: column;
+justify-self: center;
+justify-content: center;
+align-items: center;
+}
+
+/* Links container */
+#bottom > #bottom-t > #links {
+width: 40%;
+height: 20%;
+margin-top: 45px;
+}
+
+/* Styling the list of social links */
+#bottom > #bottom-t > #links > ul {
+display: flex;
+justify-content: space-between;
+}
+
+/* Styling for individual list items */
+#bottom > #bottom-t > #links > ul > li {
+cursor: pointer;
+list-style: none;
+font-weight: bold;
+text-decoration: none;  /* Remove default underline */
+position: relative;
+overflow: hidden;  /* Hide the underline until it appears */
+}
+
+/* Create the underline effect on hover */
+#bottom > #bottom-t > #links > ul > li::after {
+content: '';  /* Empty content for the pseudo-element */
+position: absolute;
+bottom: 0;  /* Position at the bottom of the list item */
+left: 0;
+width: 100%;
+height: 2px;  /* Underline thickness */
+background-color: black;  /* Underline color */
+transform: scaleX(0);  /* Initially set to 0 (hidden) */
+transform-origin: bottom right;  /* Start the scaling from right to left */
+transition: transform 0.3s ease;  /* Smooth transition for the underline */
+}
+
+/* Show underline on hover */
+#bottom > #bottom-t > #links > ul > li:hover::after {
+transform: scaleX(1);  /* Make the underline appear from left to right */
+transform-origin: bottom left;  /* Make it grow from left to right */
+}
+
+/* Styling for the copyright text */
+#bottom > #bottom-t > p {
+margin-top: 50px;
+font-size: 17px;
+font-weight: bold;
+}
+
+/* Bottom-right section with the large VETRA text */
+#bottom > #bottom-b {
+width: 100%;
+height: 35%;
+display: flex;
+justify-self: center;
+justify-content: center;
+align-items: center;
+}
+
+/* Styling for the large VETRA heading */
+#bottom > #bottom-b > h4 {
+font-size: 200px;
+margin-bottom: -130px;
+text-shadow:
+  0 0 3px rgba(255, 255, 255, 1), /* Very faint glow */
+  0 0 5px rgba(255, 255, 255, 0.8);
+}
+
+/* Styling for any icons inside the bottom section */
+#bottom > #bottom-b > i {
+font-size: 50px;
+text-shadow:
+  0 0 3px rgba(255, 255, 255, 1), /* Very faint glow */
+  0 0 5px rgba(255, 255, 255, 0.8);
+}
