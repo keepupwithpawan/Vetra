@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import "./styles/Grid.css";
 import FullScreenOverlay from "./components/FullScreenOverlay";
 import supabase from "@/utils/SupabaseClient";
@@ -20,12 +20,14 @@ interface Project {
 
 export default function Grid() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const currentRepoName = searchParams.get("repo_name");
   const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetchProjects();
-  }, []);
+  }, [currentRepoName]);
 
   const fetchProjects = async () => {
     try {
@@ -39,7 +41,10 @@ export default function Grid() {
       }
 
       if (data) {
-        const filteredProjects = data.filter(project => project.images);
+        // Filter out projects without images and the current project
+        const filteredProjects = data.filter(project => 
+          project.images && project.repo_name !== currentRepoName
+        );
         setProjects(filteredProjects);
       }
     } catch (error) {
@@ -85,7 +90,7 @@ export default function Grid() {
                 }}
                 title="Visit Website"
               >
-                <i className="fa-solid fa-arrow-up-right-from-square"></i>
+                <i className="fa-solid fa-link"></i>
               </button>
             </div>
           </div>
