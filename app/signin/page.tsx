@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSignIn } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
@@ -189,7 +189,7 @@ export default function SignIn() {
 
         <p className="create-account">
           or{" "}
-          <Link href="/sign-up" id="create-acc">
+          <Link href="/signup" id="create-acc">
             create an account
           </Link>
         </p>

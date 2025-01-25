@@ -1,0 +1,133 @@
+.upload-container {
+    width: 70%;
+    margin: 5vh auto;
+    padding: 60px;
+    background: black;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 5px;
+    font-family: 'General Sans', sans-serif;
+}
+
+.upload-title {
+    font-family: 'General Sans', sans-serif;
+    font-size: 75px;
+    font-weight: bolder;
+    margin-bottom: 40px;
+    color: white;
+    text-shadow: none;
+}
+
+.upload-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group input,
+.form-group textarea {
+    padding: 15px;
+    border: 1px solid rgba(1, 1, 1, 0.3);
+    border-radius: 5px;
+    font-family: 'General Sans', sans-serif;
+    font-size: 15px;
+    font-weight: bold;
+    background-color: rgba(255, 255, 255, 0.082);
+}
+
+.form-group textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.form-group input:focus, .form-group textarea:focus {
+    outline: none;
+  }
+
+.checkbox {
+    flex-direction: row;
+    align-items: center;
+}
+
+.checkbox label {
+    font-size: 17px;
+    font-weight: bold;
+    opacity: 75%;
+}
+
+.submit-btn {
+    cursor: pointer;
+    width: 100%;
+    margin-top: 30px;
+    padding: 20px;
+    background-color: white;
+    color: black;
+    font-weight: bold;
+    transition: opacity 0.5s ease, border-radius 0.5s ease;
+}
+
+.submit-btn:hover {
+    opacity: 70%;
+    border-radius: 50px;
+}
+
+/* Add horizontal line */
+.upload-hr {
+    width: 40vw;
+    margin-top: 12vh;
+    border: 1px solid white;
+}
+
+.image-upload {
+    margin: 20px 0;
+    background-color: rgba(255, 255, 255, 0.082);
+    color: white;
+}
+
+.image-upload-label {
+    display: block;
+    cursor: pointer;
+    border: 2px dashed rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    padding: 20px;
+    text-align: center;
+    color: white;
+}
+
+.hidden-input {
+    display: none;
+}
+
+.upload-placeholder {
+    padding: 40px;
+    font-size: 17px;
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.image-preview {
+    max-width: 100%;
+    max-height: 300px;
+    border-radius: 5px;
+}
+
+
+.color-swatches {
+    margin-top: 20px;
+}
+
+.swatches-container {
+    display: flex;
+    gap: 10px;
+}
+
+.swatch {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}

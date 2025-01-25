@@ -1,13 +1,15 @@
-import React from 'react'
+"use client";
+import React, { useState } from 'react'
 import Grid from '../Grid'
 import Navbar from '../components/Navbar'
 import NavbarHome from '../components/NavbarHome'
 
 const page = () => {
+    const [query, setQuery] = useState<string>('');
     return (
         <div>
-            <NavbarHome />
-            <Grid />
+            <NavbarHome setQuery={setQuery} />
+            <Grid query={query} />
         </div>
     )
 }

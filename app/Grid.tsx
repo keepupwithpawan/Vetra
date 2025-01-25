@@ -20,8 +20,6 @@ interface Project {
 
 export default function Grid() {
   const router = useRouter();
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
-  const [isClosing, setIsClosing] = useState(false);
   const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -41,10 +39,7 @@ export default function Grid() {
       }
 
       if (data) {
-        console.log('Fetched projects:', data); // Debug log
-        // Filter out projects without images
         const filteredProjects = data.filter(project => project.images);
-        console.log('Filtered projects:', filteredProjects); // Debug log
         setProjects(filteredProjects);
       }
     } catch (error) {
@@ -55,42 +50,47 @@ export default function Grid() {
   };
 
   const handleImageClick = (repoName: string) => {
-    console.log('Navigating to project:', repoName); // Debug log
-    // Add a small delay to ensure the console log is visible
-    setTimeout(() => {
-      router.push(`/info?repo_name=${repoName}`);
-    }, 100);
+    router.push(`/info?repo_name=${repoName}`);
   };
+
+  const handleOverlayButtonClick = (liveDemo: string) => {
+    if (liveDemo) {
+      window.open(liveDemo, '_blank');
+    }
+  };
+
   if (loading) {
     return <div className="scrollable-container">Loading projects...</div>;
   }
 
   return (
-    <>
-      <div className="scrollable-container">
-        <div className="pinterest-grid">
-          {projects.map((project) => (
-            <div className="grid-item" key={project.id}>
-              <img 
-                src={project.images} 
-                alt={`Project ${project.repo_name}`} 
-              />
-              <div className="overlay">
-                <button 
-                  className="overlay-btn"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleImageClick(project.repo_name);
-                  }}
-                  title="View Details"
-                >
-                  <i className="fa-solid fa-link"></i>
-                </button>
-              </div>
+    <div className="scrollable-container">
+      <div className="pinterest-grid">
+        {projects.map((project) => (
+          <div 
+            className="grid-item" 
+            key={project.id} 
+            onClick={() => handleImageClick(project.repo_name)}
+          >
+            <img 
+              src={project.images} 
+              alt={`Project ${project.repo_name}`} 
+            />
+            <div className="overlay">
+              <button 
+                className="overlay-btn"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleOverlayButtonClick(project.live_demo);
+                }}
+                title="Visit Website"
+              >
+                <i className="fa-solid fa-arrow-up-right-from-square"></i>
+              </button>
             </div>
-          ))}
-        </div>
+          </div>
+        ))}
       </div>
-    </>
+    </div>
   );
 }

@@ -1,10 +1,4 @@
-.signin-hr {
-  height: 0;
-  width: 65%;
-  opacity: 30%;
-}
-
-#sign-in-container {
+.vetra-signup-container {
   width: 99vw;
   height: 100vh;
   display: flex;
@@ -13,7 +7,7 @@
   align-items: center;
 }
 
-#sign-in-container > #video-container {
+.vetra-video-container {
   width: 50%;
   height: 98%;
   position: relative;
@@ -25,7 +19,7 @@
   overflow: hidden;
 }
 
-#video-container > #video-content {
+.vetra-video-content {
   position: absolute;
   top: 0;
   left: 0;
@@ -37,7 +31,7 @@
   border-radius: 20px;
 }
 
-#video-container > #video-content > video {
+.vetra-video-content video {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -49,7 +43,7 @@
   border-radius: 10px;
 }
 
-#auth-container {
+.vetra-auth-container {
   width: 49.3%;
   height: 98%;
   padding: 5% 0;
@@ -61,27 +55,17 @@
   background-color: black;
 }
 
-#auth-container > img {
+.vetra-auth-container img {
   width: 100px;
 }
 
-#auth-container > #auth-box {
+.vetra-auth-box {
   width: 60%;
   height: 75%;
   margin-top: 12%;
 }
 
-#auth-container > #auth-box > #our-creds {
-  width: 100%;
-  height: 30%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-}
-
-#auth-container > #auth-box > #our-creds > input {
+.vetra-credentials input {
   width: 100%;
   margin-bottom: 30px;
   padding: 18px;
@@ -98,26 +82,22 @@
   position: relative; /* For positioning the toggle button */
 }
 
-#auth-container > #auth-box > #our-creds > input:focus {
+.vetra-credentials input:focus {
   outline: none;
 }
 
-#auth-container > #auth-box > #our-creds > #email {
-  margin-top: 30px;
-}
-
+/* Override autofill background */
 input:-webkit-autofill,
-input:-webkit-autofill:hover, 
-input:-webkit-autofill:focus, 
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
-  outline: none;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: white;
-  transition: background-color 5000s ease-in-out 0s;
-  box-shadow: inset 0 0 20px 20px #23232329;
+  background: rgba(255, 255, 255, 0.082) !important; /* Same as default */
+  color: white !important; /* Maintain text color */
+  -webkit-text-fill-color: white !important; /* For autofill text color */
+  transition: background-color 5000s ease-in-out 0s; /* Smooth transition */
 }
 
-#auth-container > #auth-box > #our-creds > #sign-in-btn {
+.vetra-credentials .vetra-submit-btn {
   cursor: pointer;
   width: 100%;
   padding: 20px;
@@ -128,35 +108,31 @@ input:-webkit-autofill:active {
   transition: opacity 0.5s ease, border-radius 0.5s ease;
 }
 
-#auth-container > #auth-box > #our-creds > #sign-in-btn:hover {
+.vetra-credentials .vetra-submit-btn:hover {
   opacity: 70%;
   border-radius: 50px;
 }
 
-#auth-container > #auth-box > #hr-container {
-  width: 100%;
-  margin-top: 90px;
+.vetra-divider {
   display: flex;
-  justify-content: center;
   align-items: center;
+  gap: 10px;
+  margin: 20px 0;
 }
 
-#auth-container > #auth-box > #hr-container > p {
-  margin: 0 15px;
-  font-size: 13px;
+.vetra-divider hr {
+  width: 45%;
+  border: none;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.3);
 }
 
-#auth-container > #auth-box > #api-creds {
-  width: 100%;
-  height: 27%;
-  margin-top: 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
+.vetra-divider p {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
 }
 
-#auth-container > #auth-box > #api-creds > .api {
+.vetra-oauth-methods .vetra-oauth-btn {
   cursor: pointer;
   width: 100%;
   margin-top: 18px;
@@ -171,26 +147,32 @@ input:-webkit-autofill:active {
   transition: background-color 0.5s ease, color 0.5s ease;
 }
 
-#auth-container > #auth-box > #api-creds > .api:hover {
-  background-color: white;
-  color: black;
+.vetra-oauth-methods .vetra-oauth-btn:hover {
+  background: #fff;
+  color: #000;
 }
 
-#auth-container > #auth-box > #api-creds > .api > p {
+.vetra-oauth-methods .vetra-oauth-btn p {
   margin-left: 20px;
 }
 
-#auth-container > .create-account {
-  margin-top: -8px;
+.vetra-error-message {
+  color: #ff4444;
+  text-align: center;
+  font-size: 14px;
 }
 
-#auth-container > .create-account > #create-acc {
+.vetra-account-link {
+  margin-top: 40px;
+}
+
+.vetra-account-link .vetra-signin-link {
   position: relative;
   cursor: pointer;
   transition: color 0.3s ease;
 }
 
-#auth-container > .create-account > #create-acc::after {
+.vetra-account-link .vetra-signin-link::after {
   content: '';
   position: absolute;
   left: 0;
@@ -201,13 +183,6 @@ input:-webkit-autofill:active {
   transition: width 0.3s ease-in-out;
 }
 
-#auth-container > .create-account > #create-acc:hover::after {
+.vetra-account-link .vetra-signin-link:hover::after {
   width: 100%;
-}
-
-.error-message {
-  color: #ff4444;
-  margin: 8px 0;
-  text-align: center;
-  font-size: 14px;
 }

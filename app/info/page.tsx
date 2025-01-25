@@ -19,7 +19,7 @@ interface Project {
   category: string;
   repo_name: string;
   repo_source: string;
-  images: string; // Added this field
+  images: string;
 }
 
 interface PopupState {
@@ -31,7 +31,10 @@ export default function Info() {
   const { user } = useUser();
   const [project, setProject] = useState<Project | null>(null);
   const [isBookmarked, setIsBookmarked] = useState(false);
-  const [popup, setPopup] = useState<PopupState>({ message: "", visible: false });
+  const [popup, setPopup] = useState<PopupState>({
+    message: "",
+    visible: false,
+  });
   const [loading, setLoading] = useState(true);
   const searchParams = useSearchParams();
   const repoName = searchParams.get("repo_name");
@@ -40,8 +43,6 @@ export default function Info() {
     const fetchProjectData = async () => {
       try {
         if (!repoName) return;
-
-        setLoading(true); // Set loading state
 
         const { data: projectData, error: projectError } = await supabase
           .from("projects")
@@ -67,13 +68,78 @@ export default function Info() {
       } catch (error) {
         console.error("Error fetching project:", error);
       } finally {
-        setLoading(false); // Reset loading state
-        window.scrollTo({ top: 0, behavior: "smooth" }); // Scroll to the top
+        setLoading(false);
       }
     };
 
     fetchProjectData();
   }, [repoName, user]);
+
+  const handleBookmarkToggle = async () => {
+    if (!user) {
+      setPopup({
+        message: "Please log in to bookmark projects",
+        visible: true,
+      });
+      return;
+    }
+
+    if (!project) return;
+
+    try {
+      if (isBookmarked) {
+        // Remove bookmark
+        const { error } = await supabase
+          .from("bookmarks")
+          .delete()
+          .eq("user_id", user.id)
+          .eq("project_id", project.id);
+
+        if (error) throw error;
+
+        setIsBookmarked(false);
+        setPopup({
+          message: "Removed from bookmarks",
+          visible: true,
+        });
+      } else {
+        // Add bookmark
+        const { error } = await supabase.from("bookmarks").insert({
+          user_id: user.id,
+          project_id: project.id,
+          created_at: new Date().toISOString(),
+        });
+
+        if (error) throw error;
+
+        setIsBookmarked(true);
+        setPopup({
+          message: "Added to bookmarks!",
+          visible: true,
+        });
+      }
+    } catch (error) {
+      console.error("Error toggling bookmark:", error);
+      setPopup({
+        message: "Error updating bookmark",
+        visible: true,
+      });
+    }
+
+    setTimeout(() => setPopup({ message: "", visible: false }), 3000);
+  };
+
+  const handleLiveDemoRedirect = () => {
+    if (project?.live_demo) {
+      window.open(project.live_demo, "_blank");
+    }
+  };
+
+  const handleRepoSourceRedirect = () => {
+    if (project?.repo_source) {
+      window.open(project.repo_source, "_blank");
+    }
+  };
 
   if (loading) {
     return (
@@ -93,18 +159,6 @@ export default function Info() {
   const tags = project.category
     ? project.category.split(",").map((tag: string) => tag.trim())
     : [];
-
-  const handleLiveDemoRedirect = () => {
-    if (project.live_demo) {
-      window.open(project.live_demo, "_blank");
-    }
-  };
-
-  const handleRepoSourceRedirect = () => {
-    if (project.repo_source) {
-      window.open(project.repo_source, "_blank");
-    }
-  };
 
   return (
     <>
@@ -135,10 +189,12 @@ export default function Info() {
                   title={
                     isBookmarked ? "Remove from Bookmarks" : "Add to Bookmarks"
                   }
-                  onClick={() => {}}
+                  onClick={handleBookmarkToggle}
                 >
                   <i
-                    className={`fa-${isBookmarked ? "solid" : "regular"} fa-bookmark`}
+                    className={`fa-${
+                      isBookmarked ? "solid" : "regular"
+                    } fa-bookmark`}
                   ></i>
                 </div>
                 {project.live_demo && (
@@ -164,15 +220,26 @@ export default function Info() {
               <div id="about">
                 <p id="github-about">{project.description}</p>
               </div>
-              <div id="buttons">
+              <div id="buttons" className="flex gap-4 mt-4 items-center">
                 {project.repo_source && (
                   <button
-                    id="github-btn"
+                    className="github-btn info-btn"
                     title="View on Github"
                     onClick={handleRepoSourceRedirect}
                   >
                     <i className="fa-brands fa-github"></i>&nbsp;&nbsp; Source
                   </button>
+                )}
+                {project.githubusername && (
+                  <a
+                    className="github-btn info-btn"
+                    href={`https://github.com/${project.githubusername}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <i className="fa-solid fa-user"></i>&nbsp;&nbsp;
+                    {project.githubusername}
+                  </a>
                 )}
               </div>
             </div>

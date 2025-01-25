@@ -131,7 +131,7 @@
     /* background-color: red; */
   }
 
-  #info-container > #info > #info-content > #buttons > #github-btn {
+  #info-container > #info > #info-content > #buttons > .github-btn {
     cursor: pointer;
     padding: 5px 10px;
     margin: 20px 0 0 5px;
@@ -146,7 +146,7 @@
     font-size: 13px;
   }
 
-  #info-container > #info > #info-content > #buttons > #github-btn > i {
+  #info-container > #info > #info-content > #buttons > .github-btn > i {
     color: black;
   }
   
