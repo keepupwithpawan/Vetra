@@ -1,0 +1,149 @@
+* {
+    margin: 0;
+    padding: 0;
+    background-color: black;
+    color: white;
+    font-family: 'General-Sans', sans-serif;
+}
+
+p, h1 {
+    background: none;
+}
+
+body {
+    overflow: hidden;
+}
+
+#main-container {
+    width:  100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#main-container > #top {
+    width: 100%;
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* background-color: red; */
+}
+
+#main-container > #top > #logo > img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+}
+
+#main-container > #bottom {
+    width: 100%;
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#main-container > #bottom > h1 {
+    font-size: 30px;
+    font-weight: lighter;
+}
+
+#main-container > #bottom > #form-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 40px 0;
+}
+
+#main-container > #bottom > #form-container > input {
+    width: 60%;
+    margin-bottom: 40px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.082);
+    font-size: 15px;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    transition: border-radius 0.5s ease, padding 0.5s ease;
+}
+
+#main-container > #bottom > #form-container > input:focus {
+    border-radius: 50px;
+    padding: 20px 25px;
+    outline: none;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active{
+    outline: none;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: white;
+    transition: background-color 5000s ease-in-out 0s;
+    box-shadow: inset 0 0 20px 20px #23232329;
+}
+
+#main-container > #bottom > #form-container > button {
+    cursor: pointer;
+    width: 15%;
+    padding: 17px;
+    background-color: white;
+    color: black;
+    box-shadow:
+    0 0 10px rgba(147, 62, 255, 0.6),  /* Subtle purple glow */
+    0 0 30px rgba(147, 62, 255, 0.5),
+    0 0 40px rgba(147, 62, 255, 0.4),
+    0 0 50px rgba(147, 62, 255, 0.3); /* All sides evenly */
+    border-radius: 10px;
+    transition: opacity 0.5s ease, border-radius 0.5s ease;
+}
+
+#main-container > #bottom > #form-container > button:hover {
+    opacity: 70%;
+    border-radius: 50px;
+}
+
+.toast {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #4caf50; /* Success color */
+    color: white;
+    padding: 15px 20px;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+    animation: fadeInOut 3s ease-in-out;
+    z-index: 1000;
+  }
+  
+  /* Fade-in and fade-out animation */
+  @keyframes fadeInOut {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    10% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    90% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+  }
+  
