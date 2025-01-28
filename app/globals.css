@@ -19,7 +19,8 @@ body {
   background-color: black;
   color: white;
   font-family: "General Sans", sans-serif;
-  overflow-y: hidden;
+  overflow-x: hidden;
+  scrollbar-width: thin;
 }
 
 .fade-overlay {

@@ -50,35 +50,55 @@ const PrelaunchPage = () => {
 
     return (
         <div id="main-container">
-            <div id="top">
-                <div id="logo">
-                    <Image src={Vetra} alt="Vetra Logo" />
+            <div id="main-content">
+                <div id="top">
+                    <div id="logo">
+                        <Image src={Vetra} alt="Vetra Logo" />
+                    </div>
+                </div>
+
+                <div id="bottom">
+                    <h1>A Dribble/Pinterest alternative for developers. Join the waitlist!</h1>
+                    <form id="form-container" onSubmit={handleSubscribe}>
+                        <input
+                            id="email-input"
+                            type="email"
+                            name="email"
+                            placeholder="Enter your email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
+                        />
+                        <button id="subscribe-button" type="submit" >
+                            Subscribe
+                        </button>
+                    </form>
+
+                    {/* Toast Notification */}
+                    {showToast && (
+                        <div className="toast">
+                            <p>{message}</p>
+                        </div>
+                    )}
                 </div>
             </div>
 
-            <div id="bottom">
-                <h1>A Dribble/Pinterest alternative for developers. Join the waitlist!</h1>
-                <form id="form-container" onSubmit={handleSubscribe}>
-                    <input
-                        id="email-input"
-                        type="email"
-                        name="email"
-                        placeholder="Enter your email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        required
-                    />
-                    <button id="subscribe-button" type="submit">
-                        Subscribe
-                    </button>
-                </form>
-
-                {/* Toast Notification */}
-                {showToast && (
-                    <div className="toast">
-                        <p>{message}</p>
+            <div id="waitlist-footer" className="text-black">
+                <div id="waitlist-bottom">
+                    <div id="waitlist-bottom-t">
+                        <p>©️ 2025 Vetra - Developed by ASAP</p>
+                        <div id="waitlist-links">
+                            <ul>
+                                <li>LinkedIn</li>
+                                <li>Instagram</li>
+                                <li>Twitter</li>
+                            </ul>
+                        </div>
                     </div>
-                )}
+                    <div id="waitlist-bottom-b">
+                        <h4>VETRA</h4>
+                    </div>
+                </div>
             </div>
         </div>
     );

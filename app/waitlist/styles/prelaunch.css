@@ -10,22 +10,30 @@ p, h1 {
     background: none;
 }
 
-body {
-    overflow: hidden;
-}
 
 #main-container {
     width:  100vw;
-    height: 100vh;
+    height: auto;
+    overflow-y: auto ;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
 
-#main-container > #top {
+#main-container > #main-content {
+  width: 100%;
+  height: 65%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#main-container > #main-content > #top {
     width: 100%;
     height: 50%;
+    margin-top: 20vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -33,26 +41,28 @@ body {
     /* background-color: red; */
 }
 
-#main-container > #top > #logo > img {
+#main-container > #main-content >  #top > #logo > img {
     width: 200px;
     height: 200px;
     border-radius: 50%;
 }
 
-#main-container > #bottom {
+#main-container > #main-content >  #bottom {
     width: 100%;
     height: 50%;
+    margin-bottom: 100px;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-#main-container > #bottom > h1 {
+#main-container > #main-content >  #bottom > h1 {
+  margin-top: 30px;
     font-size: 30px;
     font-weight: lighter;
 }
 
-#main-container > #bottom > #form-container {
+#main-container > #main-content >  #bottom > #form-container {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -60,7 +70,7 @@ body {
     margin: 40px 0;
 }
 
-#main-container > #bottom > #form-container > input {
+#main-container > #main-content >  #bottom > #form-container > input {
     width: 60%;
     margin-bottom: 40px;
     padding: 20px;
@@ -76,7 +86,7 @@ body {
     transition: border-radius 0.5s ease, padding 0.5s ease;
 }
 
-#main-container > #bottom > #form-container > input:focus {
+#main-container > #main-content >  #bottom > #form-container > input:focus {
     border-radius: 50px;
     padding: 20px 25px;
     outline: none;
@@ -93,7 +103,7 @@ input:-webkit-autofill:active{
     box-shadow: inset 0 0 20px 20px #23232329;
 }
 
-#main-container > #bottom > #form-container > button {
+#main-container > #main-content >  #bottom > #form-container > button {
     cursor: pointer;
     width: 15%;
     padding: 17px;
@@ -108,7 +118,7 @@ input:-webkit-autofill:active{
     transition: opacity 0.5s ease, border-radius 0.5s ease;
 }
 
-#main-container > #bottom > #form-container > button:hover {
+#main-container > #main-content >  #bottom > #form-container > button:hover {
     opacity: 70%;
     border-radius: 50px;
 }
@@ -146,4 +156,202 @@ input:-webkit-autofill:active{
       transform: translateY(20px);
     }
   }
+  
+
+  #waitlist-footer {
+    width: 100vw;
+    height: 35vh;
+    overflow: hidden;
+    color: black;
+  }
+  
+  /* Bottom section */
+  #waitlist-bottom {
+  width: 100%;
+  max-height: 33vh;
+  border-radius: 30px 30px 0 0;
+  background: white;
+  color: black;
+  box-shadow:
+    0 0 40px rgba(255, 255, 255, 0.2), /* Intensified glow */
+    0 0 50px rgba(255, 255, 255, 0.2),
+    0 0 60px rgba(255, 255, 255, 0.2),
+    0 0 7px rgba(255, 255, 255, 0.2);
+  }
+  
+  /* Styling for the top part of the bottom section */
+  #waitlist-bottom > #waitlist-bottom-t {
+  width: 70%;
+  height: 35%;
+  display: flex;
+  flex-direction: column;
+  justify-self: center;
+  justify-content: center;
+  align-items: center;
+  background: none;
+  }
+  
+  /* Links container */
+  #waitlist-bottom > #waitlist-bottom-t > #waitlist-links {
+  width: 40%;
+  height: 20%;
+  margin-top: 45px;
+  background: none;
+  }
+  
+  /* Styling the list of social links */
+  #waitlist-bottom > #waitlist-bottom-t > #waitlist-links > ul {
+  display: flex;
+  justify-content: space-between;
+  background: none;
+  }
+  
+  /* Styling for individual list items */
+  #waitlist-bottom > #waitlist-bottom-t > #waitlist-links > ul > li {
+  cursor: pointer;
+  list-style: none;
+  font-weight: bold;
+  text-decoration: none;  /* Remove default underline */
+  position: relative;
+  overflow: hidden;  /* Hide the underline until it appears */
+  background: none;
+  color: black;
+  }
+  
+  /* Create the underline effect on hover */
+  #waitlist-bottom > #waitlist-bottom-t > #waitlist-links > ul > li::after {
+  content: '';  /* Empty content for the pseudo-element */
+  position: absolute;
+  bottom: 0;  /* Position at the bottom of the list item */
+  left: 0;
+  width: 100%;
+  height: 2px;  /* Underline thickness */
+  background-color: black;  /* Underline color */
+  transform: scaleX(0);  /* Initially set to 0 (hidden) */
+  transform-origin: bottom right;  /* Start the scaling from right to left */
+  transition: transform 0.3s ease;  /* Smooth transition for the underline */
+  
+  }
+  
+  /* Show underline on hover */
+  #waitlist-bottom > #waitlist-bottom-t > #waitlist-links > ul > li:hover::after {
+  transform: scaleX(1);  /* Make the underline appear from left to right */
+  transform-origin: bottom left;  /* Make it grow from left to right */
+  
+  }
+  
+  /* Styling for the copyright text */
+  #waitlist-bottom > #waitlist-bottom-t > p {
+  margin-top: 50px;
+  font-size: 17px;
+  font-weight: bold;
+  background: none;
+  color: black;
+  }
+  
+  /* Bottom-right section with the large VETRA text */
+  #waitlist-bottom > #waitlist-bottom-b {
+  width: 100%;
+  height: 35%;
+  display: flex;
+  justify-self: center;
+  justify-content: center;
+  align-items: center;
+  background: none;
+  color: black;
+  }
+  
+  /* Styling for the large VETRA heading */
+  #waitlist-bottom > #waitlist-bottom-b > h4 {
+  font-size: 200px;
+  margin-bottom: -130px;
+  text-shadow:
+    0 0 3px rgba(255, 255, 255, 1), /* Very faint glow */
+    0 0 5px rgba(255, 255, 255, 0.8);
+    background: none;
+    color: black;
+  }
+  
+  /* Styling for any icons inside the bottom section */
+  #waitlist-bottom > #waitlist-bottom-b > i {
+  font-size: 50px;
+  text-shadow:
+    0 0 3px rgba(255, 255, 255, 1), /* Very faint glow */
+    0 0 5px rgba(255, 255, 255, 0.8);
+    background: none;
+  }
+
+  /* Responsive styles */
+  @media (max-width: 900px) {  
+    #main-container > #main-content >  #bottom {
+      padding: 0 40px;
+    }
+
+    #main-container > #main-content > #bottom > h1 {
+      font-size: 16px;
+      text-align: center;
+      width: 90%;
+    }
+  }
+
+@media (max-width: 768px) {
+  #main-container > #main-content > #top > #logo > img {
+      width: 120px;
+      height: 120px;
+  }
+
+  #main-container > #main-content >  #bottom {
+    padding: 0 40px;
+  }
+
+  #main-container > #main-content > #bottom > h1 {
+      font-size: 16px;
+      font-weight: bold;
+      text-align: center;
+  }
+
+  #main-container > #main-content > #bottom > #form-container > input {
+      width: 90%;
+      padding: 10px;
+  }
+
+  #main-container > #main-content > #bottom > #form-container > button {
+      width: 70%;
+      margin-top: 20px;
+  }
+
+  #waitlist-bottom > #waitlist-bottom-t > #waitlist-links > ul {
+      flex-direction: column;
+      align-items: center;
+  }
+
+  #waitlist-bottom > #waitlist-bottom-b > h4 {
+      font-size: 120px;
+      margin-bottom: -70px;
+  }
+}
+
+@media (max-width: 480px) {
+  #main-container > #main-content > #top > #logo > img {
+      width: 100px;
+      height: 100px;
+  }
+
+  #main-container > #main-content > #bottom > h1 {
+    margin-top: 30px;
+    font-size: 10px;
+    font-weight: bold;
+  }
+
+  #main-container > #main-content > #bottom > #form-container > button {
+      width: 80%;
+      margin-top: 20px;
+  }
+
+  #waitlist-bottom > #waitlist-bottom-b > h4 {
+      font-size: 90px;
+      margin-bottom: -50px;
+  }
+}
+
   
