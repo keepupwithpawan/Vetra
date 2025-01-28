@@ -321,6 +321,10 @@ input:-webkit-autofill:active{
       font-size: 120px;
       margin-bottom: -70px;
   }
+
+  #waitlist-bottom > #waitlist-bottom-t > p {
+    text-align: center;
+  }
 }
 
 @media (max-width: 480px) {
