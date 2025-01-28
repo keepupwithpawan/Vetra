@@ -1,5 +1,6 @@
 "use client"
 import React, { useState, useEffect } from "react";
+import { useRouter } from "next/navigation"
 
 import "./styles/prelaunch.css"; // Import your CSS file
 import Vetra from "./assets/Vetra.png";
@@ -10,6 +11,20 @@ import './index.css'
 
 
 const PrelaunchPage = () => {
+      const navigate = useRouter(); // Hook for navigation
+    
+      const handleRedirectLinkedIn = () => {
+        navigate.push("https://www.linkedin.com/company/vetra-dev/"); 
+      };      
+      
+      const handleRedirectInsta = () => {
+        navigate.push("https://www.instagram.com/vetra_dev/"); 
+      };     
+      
+      const handleRedirectTwitter = () => {
+        navigate.push("https://x.com/vetra_dev"); 
+      };
+
     const [email, setEmail] = useState("");
     const [message, setMessage] = useState("");
     const [showToast, setShowToast] = useState(false);
@@ -89,9 +104,9 @@ const PrelaunchPage = () => {
                         <p>©️ 2025 Vetra - Developed by ASAP</p>
                         <div id="waitlist-links">
                             <ul>
-                                <li>LinkedIn</li>
-                                <li>Instagram</li>
-                                <li>Twitter</li>
+                                <li onClick={handleRedirectLinkedIn}>LinkedIn</li>
+                                <li onClick={handleRedirectInsta}>Instagram</li>
+                                <li onClick={handleRedirectTwitter}>Twitter</li>
                             </ul>
                         </div>
                     </div>
