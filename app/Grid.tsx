@@ -5,6 +5,8 @@ import "./styles/Grid.css";
 import FullScreenOverlay from "./components/FullScreenOverlay";
 import supabase from "@/utils/SupabaseClient";
 
+
+
 interface Project {
   id: number;
   created_at: string;
