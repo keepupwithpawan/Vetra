@@ -13,6 +13,7 @@ const publicRoutes = createRouteMatcher([
   '/sso-callback',
   '/sso-callback/(.*)',
   '/error',
+  '/waitlist'
 ]);
 
 const adminRoutes = createRouteMatcher(['/admin', '/admin/(.*)', '/admin/dashboard']);
