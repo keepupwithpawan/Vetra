@@ -162,7 +162,7 @@ export default function Info() {
 
   return (
     <>
-      <NavbarHome />
+      {/* <NavbarHome /> */}
       <Popup message={popup.message} visible={popup.visible} />
       <div id="info-wrapper">
         <div id="info-container">
@@ -192,9 +192,8 @@ export default function Info() {
                   onClick={handleBookmarkToggle}
                 >
                   <i
-                    className={`fa-${
-                      isBookmarked ? "solid" : "regular"
-                    } fa-bookmark`}
+                    className={`fa-${isBookmarked ? "solid" : "regular"
+                      } fa-bookmark`}
                   ></i>
                 </div>
                 {project.live_demo && (

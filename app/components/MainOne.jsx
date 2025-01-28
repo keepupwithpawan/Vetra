@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation"
 import "../styles/MainOne.css";
-import LanderVideo from "../../public/assets/Lander-Shapes.mp4"
+
 
 
 export default function MainOne({ onTransition }) {
