@@ -1,11 +1,9 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import "./styles/Grid.css";
 import FullScreenOverlay from "./components/FullScreenOverlay";
 import supabase from "@/utils/SupabaseClient";
-
-
 
 interface Project {
   id: number;
@@ -20,7 +18,7 @@ interface Project {
   images: string;
 }
 
-export default function Grid() {
+function GridContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const currentRepoName = searchParams.get("repo_name");
@@ -99,5 +97,13 @@ export default function Grid() {
         ))}
       </div>
     </div>
+  );
+}
+
+export default function Grid() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <GridContent />
+    </Suspense>
   );
 }
