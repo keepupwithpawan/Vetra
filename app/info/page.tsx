@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import "../styles/Info.css";
 import NavbarHome from "../components/NavbarHome";
 import Grid from "../Grid";
@@ -27,7 +27,7 @@ interface PopupState {
   visible: boolean;
 }
 
-export default function Info() {
+function InfoContent() {
   const { user } = useUser();
   const [project, setProject] = useState<Project | null>(null);
   const [isBookmarked, setIsBookmarked] = useState(false);
@@ -161,8 +161,7 @@ export default function Info() {
     : [];
 
   return (
-    <>
-      {/* <NavbarHome /> */}
+    <Suspense fallback={<div>Loading...</div>}>
       <Popup message={popup.message} visible={popup.visible} />
       <div id="info-wrapper">
         <div id="info-container">
@@ -247,6 +246,14 @@ export default function Info() {
         <p id="more-content">Browse some more</p>
         <Grid />
       </div>
-    </>
+    </Suspense>
+  );
+}
+
+export default function InfoPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <InfoContent />
+    </Suspense>
   );
 }
