@@ -10,8 +10,8 @@ const page = () => {
     return (
         <div>
             <NavbarHome setQuery={setQuery} />
-            {/* <Grid query={query} /> */}
-            <Grid />
+            <Grid query={query} />
+            {/* <Grid /> */}
         </div>
     )
 }

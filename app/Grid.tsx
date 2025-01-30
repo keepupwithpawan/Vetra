@@ -2,7 +2,6 @@
 import React, { useState, useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import "./styles/Grid.css";
-import FullScreenOverlay from "./components/FullScreenOverlay";
 import supabase from "@/utils/SupabaseClient";
 
 interface Project {
@@ -18,7 +17,7 @@ interface Project {
   images: string;
 }
 
-function GridContent() {
+function GridContent({ query }: { query: string }) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const currentRepoName = searchParams.get("repo_name");
@@ -27,28 +26,34 @@ function GridContent() {
 
   useEffect(() => {
     fetchProjects();
-  }, [currentRepoName]);
+  }, [query, currentRepoName]); // ✅ Re-fetch when query changes
 
   const fetchProjects = async () => {
     try {
       const { data, error } = await supabase
-        .from('projects')
-        .select('*')
-        .order('created_at', { ascending: false });
+        .from("projects")
+        .select("*")
+        .order("created_at", { ascending: false });
 
-      if (error) {
-        throw error;
-      }
+      if (error) throw error;
 
       if (data) {
-        // Filter out projects without images and the current project
-        const filteredProjects = data.filter(project => 
-          project.images && project.repo_name !== currentRepoName
-        );
+        // Filter based on query
+        const filteredProjects = data
+          .filter(
+            (project) =>
+              project.images &&
+              project.repo_name !== currentRepoName &&
+              (query
+                ? project.repo_name.toLowerCase().includes(query.toLowerCase()) ||
+                project.category.toLowerCase().includes(query.toLowerCase()) ||
+                project.description.toLowerCase().includes(query.toLowerCase())
+                : true) // Show all if query is empty
+          );
         setProjects(filteredProjects);
       }
     } catch (error) {
-      console.error('Error fetching projects:', error);
+      console.error("Error fetching projects:", error);
     } finally {
       setLoading(false);
     }
@@ -56,12 +61,6 @@ function GridContent() {
 
   const handleImageClick = (repoName: string) => {
     router.push(`/info?repo_name=${repoName}`);
-  };
-
-  const handleOverlayButtonClick = (liveDemo: string) => {
-    if (liveDemo) {
-      window.open(liveDemo, '_blank');
-    }
   };
 
   if (loading) {
@@ -72,27 +71,12 @@ function GridContent() {
     <div className="scrollable-container">
       <div className="pinterest-grid">
         {projects.map((project) => (
-          <div 
-            className="grid-item" 
-            key={project.id} 
+          <div
+            className="grid-item"
+            key={project.id}
             onClick={() => handleImageClick(project.repo_name)}
           >
-            <img 
-              src={project.images} 
-              alt={`Project ${project.repo_name}`} 
-            />
-            <div className="overlay">
-              <button 
-                className="overlay-btn"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  handleOverlayButtonClick(project.live_demo);
-                }}
-                title="Visit Website"
-              >
-                <i className="fa-solid fa-link"></i>
-              </button>
-            </div>
+            <img src={project.images} alt={`Project ${project.repo_name}`} />
           </div>
         ))}
       </div>
@@ -100,10 +84,10 @@ function GridContent() {
   );
 }
 
-export default function Grid() {
+export default function Grid({ query }: { query: string }) {
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <GridContent />
+      <GridContent query={query} /> {/* ✅ Pass query to GridContent */}
     </Suspense>
   );
 }

@@ -4,8 +4,6 @@ import { UserButton } from "@clerk/nextjs";
 import { useState, useEffect } from 'react';
 import '../styles/NavbarHome.css';
 
-
-
 export default function NavbarHome({ setQuery }) {
     const router = useRouter();
     const [mounted, setMounted] = useState(false);
@@ -21,15 +19,9 @@ export default function NavbarHome({ setQuery }) {
 
     const handleKeyPress = (e) => {
         if (e.key === 'Enter') {
-            // If input is empty or only whitespace, reset to show all images
-            if (!inputValue.trim()) {
-                setQuery('');
-                setInputValue('');
-            } else {
-                setQuery(inputValue);
-            }
+          setQuery(inputValue.trim());
         }
-    };
+      };
 
     const handleInputChange = (e) => {
         setInputValue(e.target.value);
@@ -40,9 +32,7 @@ export default function NavbarHome({ setQuery }) {
         setQuery('');
     };
 
-    if (!mounted) {
-        return null;
-    }
+    if (!mounted) return null;
 
     return (
         <div id="navHome">
@@ -53,13 +43,12 @@ export default function NavbarHome({ setQuery }) {
             <div id="search-bar">
                 <i className="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
                 <input
-                    type="text"
-                    placeholder="Search for 'Portfolio' and press Enter"
-                    value={inputValue}
-                    onChange={handleInputChange}
-                    onKeyPress={handleKeyPress}
-                    aria-label="Search projects"
-                />
+        type="text"
+        placeholder="Search..."
+        value={inputValue}
+        onChange={(e) => setInputValue(e.target.value)}
+        onKeyDown={handleKeyPress} // ✅ Trigger search
+      />
                 {inputValue && (
                     <button
                         onClick={handleClear}
