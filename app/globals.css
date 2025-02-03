@@ -128,3 +128,22 @@ body {
     --radius: 0.5rem;
   }
 }
+
+
+#left {
+
+
+  background: none;
+
+  font-family: 'Melodrama', serif;
+  font-size: 24px;
+  background: white;
+  color: black;
+  font-weight: bold;
+  padding: 2px 14px;
+  border-radius: 100%;
+  box-shadow: 0 0 15px rgba(147, 62, 255, 0.6),  /* Subtle purple glow */
+  0 0 30px rgba(147, 62, 255, 0.5),
+  0 0 50px rgba(147, 62, 255, 0.4),
+  0 0 70px rgba(147, 62, 255, 0.3); /* All sides evenly */
+}
