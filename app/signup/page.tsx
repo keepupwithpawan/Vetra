@@ -128,6 +128,7 @@ function SignUp() {
                 <div id="auth-box">
                     {!pendingVerification ? (
                         <form onSubmit={submit}>
+                             <div id="clerk-captcha"></div>
                             <div id="our-creds">
                                 <input
                                     type="email"
@@ -212,7 +213,7 @@ function SignUp() {
                                     {loading ? <LoadingSpinner /> : "Verify Email"}
                                 </button>
                             </div>
-                            {error && <div className="error-message">{error}</div>}
+                            <div className="error-message">{error || " "}</div>
                         </form>
                     )}
                 </div>

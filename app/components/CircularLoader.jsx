@@ -1,17 +1,54 @@
 import React from 'react';
 
-const CircularLoader = ({ size = 50 }) => {
+const CircularLoader = ({ size = 10, color = '#FFFF' }) => {
   return (
     <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black/50 z-50">
-      <div 
-        style={{
-          width: `${size}px`, 
-          height: `${size}px`, 
-          borderColor: '#8E44AD', // Deep purple color
-          borderTopColor: 'transparent'
-        }}
-        className="animate-spin rounded-full border-4 border-solid"
-      ></div>
+      <div className="flex space-x-1">
+        <span
+          className="dot"
+          style={{
+            width: `${size}px`,
+            height: `${size}px`,
+            backgroundColor: color,
+            animationDelay: '0s',
+          }}
+        ></span>
+        <span
+          className="dot"
+          style={{
+            width: `${size}px`,
+            height: `${size}px`,
+            backgroundColor: color,
+            animationDelay: '0.2s',
+          }}
+        ></span>
+        <span
+          className="dot"
+          style={{
+            width: `${size}px`,
+            height: `${size}px`,
+            backgroundColor: color,
+            animationDelay: '0.4s',
+          }}
+        ></span>
+      </div>
+
+      <style jsx>{`
+        .dot {
+          display: inline-block;
+          border-radius: 50%;
+          animation: bounce 1.2s infinite ease-in-out;
+        }
+
+        @keyframes bounce {
+          0%, 100% {
+            transform: translateY(0);
+          }
+          50% {
+            transform: translateY(-5px);
+          }
+        }
+      `}</style>
     </div>
   );
 };

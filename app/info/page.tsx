@@ -156,7 +156,7 @@ function InfoContent() {
   };
 
   if (loading) {
-    return <CircularLoader size={60} color="#FF0000" />
+    return <CircularLoader  />
   }
 
   if (!project) {
