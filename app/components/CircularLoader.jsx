@@ -1,6 +1,6 @@
 import React from 'react';
 
-const CircularLoader = ({ size = 10, color = '#FFFF' }) => {
+const CircularLoader = ({ size = 5, color = '#FFFF' }) => {
   return (
     <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black/50 z-50">
       <div className="flex space-x-1">
