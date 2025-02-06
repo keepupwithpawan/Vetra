@@ -42,7 +42,7 @@ export default function NavbarHome({ setQuery }) {
     return (
         <>
             {/* PC VIEW (Hidden on Mobile) */}
-            <nav className="hidden md:flex fixed top-0 left-0 right-0 z-50 bg-black backdrop-blur-md shadow-md border-b border-white/10">
+            <nav className="hidden md:flex fixed top-0 left-0 right-0 z-50 bg-[#030303] backdrop-blur-md shadow-md border-b border-white/10">
                 <div className="w-full max-w-7xl mx-auto px-6 py-3 flex items-center justify-between">
                     <div className="" id='left'>
                         V

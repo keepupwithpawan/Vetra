@@ -8,10 +8,9 @@ import NavbarHome from '../components/NavbarHome'
 const page = () => {
     const [query, setQuery] = useState<string>('');
     return (
-        <div>
+        <div className='bg-[#030303]'>
             <NavbarHome setQuery={setQuery} />
             <Grid query={query} />
-            {/* <Grid /> */}
         </div>
     )
 }

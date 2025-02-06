@@ -1,8 +1,10 @@
 "use client";
 import React, { useState, useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import "./styles/Grid.css";
+// import "./styles/Grid.css";
 import supabase from "@/utils/SupabaseClient";
+import { LinkIcon } from "lucide-react";
+
 
 interface Project {
   id: number;
@@ -64,23 +66,50 @@ function GridContent({ query }: { query: string }) {
   };
 
   if (loading) {
-    return <div className="scrollable-container">Loading projects...</div>;
+    return <div className="bg-[#030303]">Loading projects...</div>;
   }
 
   return (
-    <div className="scrollable-container">
-      <div className="pinterest-grid">
-        {projects.map((project) => (
-          <div
-            className="grid-item"
-            key={project.id}
-            onClick={() => handleImageClick(project.repo_name)}
-          >
-            <img src={project.images} alt={`Project ${project.repo_name}`} />
+    <div className="columns-2 mt-8 md:mt-32 sm:columns-2 md:columns-3 lg:columns-4 bg-[#030303] md:gap-20 gap-12 md:mx-20 mx-4 max-w-8xl md:space-y-20 space-y-12">
+      {projects.map((project) => (
+        <div
+          key={project.id}
+          onClick={() => handleImageClick(project.repo_name)}
+          className="break-inside-avoid w-full shadow-lg overflow-hidden cursor-pointer hover:shadow-xl transition-shadow duration-300"
+        >
+          <img
+            src={project.images}
+            className="w-full h-auto object-cover"
+            alt={`Project ${project.repo_name}`}
+          />
+          <div className="bg-white flex gap-2 items-center p-3 sm:p-4 text-black">
+            <LinkIcon size={16} className="flex-shrink-0" />
+            <h3 className="text-sm font-bold truncate">{project.repo_name}</h3>
           </div>
-        ))}
-      </div>
+        </div>
+      ))}
+      {projects.map((project) => (
+        <div
+          key={project.id}
+          onClick={() => handleImageClick(project.repo_name)}
+          className="break-inside-avoid w-full shadow-lg overflow-hidden cursor-pointer hover:shadow-xl transition-shadow duration-300"
+        >
+          <img
+            src={project.images}
+            className="w-full h-auto object-cover"
+            alt={`Project ${project.repo_name}`}
+          />
+          <div className="bg-white flex gap-2 items-center p-3 sm:p-4 text-black">
+            <LinkIcon size={16} className="flex-shrink-0" />
+            <h3 className="text-sm font-bold truncate">{project.live_demo}</h3>
+          </div>
+        </div>
+      ))}
+
     </div>
+
+
+
   );
 }
 

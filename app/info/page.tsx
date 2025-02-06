@@ -1,15 +1,14 @@
 "use client";
 import React, { Suspense, useEffect, useState } from "react";
 import "../styles/Info.css";
-import NavbarHome from "../components/NavbarHome"; // Import NavbarHome
-import Grid from "../Grid";
-import Image from "next/image";
-import loader from "../../public/assets/spinner.png";
 import Popup from "../components/Popup";
 import supabase from "@/utils/SupabaseClient";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useUser } from "@clerk/clerk-react";
 import CircularLoader from "../components/CircularLoader"
+import NavbarHome from "../components/NavbarHome";
+import Grid from "../Grid";
+
 
 interface Project {
   id: number;
@@ -28,7 +27,7 @@ interface PopupState {
   visible: boolean;
 }
 
-function InfoContent() {
+function InfoContent({ query }: { query: string }) {
   const { user } = useUser();
   const [project, setProject] = useState<Project | null>(null);
   const [isBookmarked, setIsBookmarked] = useState(false);
@@ -39,30 +38,31 @@ function InfoContent() {
   const [loading, setLoading] = useState(true);
   const searchParams = useSearchParams();
   const repoName = searchParams.get("repo_name");
+  const router = useRouter();
 
   useEffect(() => {
     const fetchProjectData = async () => {
       try {
         setLoading(true); // Ensure loading is set to true immediately
-    
+
         // Artificial delay to make loader visible
         await new Promise(resolve => setTimeout(resolve, 500)); // 1.5 seconds delay
-    
+
         if (!repoName) {
           setLoading(false);
           return;
         }
-    
+
         const { data: projectData, error: projectError } = await supabase
           .from("projects")
           .select("*")
           .eq("repo_name", repoName)
           .single();
-    
+
         if (projectError) throw projectError;
-    
+
         setProject(projectData as Project);
-    
+
         // Check if project is bookmarked
         if (user?.id && projectData.id) {
           const { data: bookmark } = await supabase
@@ -71,7 +71,7 @@ function InfoContent() {
             .eq("user_id", user.id)
             .eq("project_id", projectData.id)
             .single();
-    
+
           setIsBookmarked(!!bookmark);
         }
       } catch (error) {
@@ -156,11 +156,11 @@ function InfoContent() {
   };
 
   if (loading) {
-    return <CircularLoader size={60} color="#FF0000" />
+    return <CircularLoader size={60} />
   }
 
   if (!project) {
-    return <div>Project not found</div>;
+    return <div className="bg-[#030303] w-full flex ic">Project not found</div>;
   }
 
   const capitalizeFirstLetter = (string: string): string =>
@@ -173,7 +173,14 @@ function InfoContent() {
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <Popup message={popup.message} visible={popup.visible} />
+
       <div id="info-wrapper">
+        <div>
+          <a href="/grid" className="px-8 mt-20"
+          >
+            Back
+          </a>
+        </div>
         <div id="info-container">
           <div id="banner">
             {project?.images && (
@@ -183,10 +190,13 @@ function InfoContent() {
                 style={{
                   width: "100%",
                   height: "100%",
-                  objectFit: "cover",
+                  objectFit: "contain",
                 }}
               />
+
+
             )}
+
           </div>
           <div id="info">
             <div id="info-nav">
@@ -194,22 +204,25 @@ function InfoContent() {
               <div id="info-btns">
                 <div
                   id="collection"
-                  className="info-btn"
+                  className="px-4 py-2 bg-white font-bold rounded-full text-black cursor-pointer transition-all duration-300 hover:shadow-[0_0_10px] hover:shadow-blue-500"
                   title={isBookmarked ? "Remove from Bookmarks" : "Add to Bookmarks"}
                   onClick={handleBookmarkToggle}
                 >
-                  <i className={`fa-${isBookmarked ? "solid" : "regular"} fa-bookmark`}></i>
+                  {isBookmarked ? "Saved" : "Save"}
                 </div>
+
                 {project.live_demo && (
                   <div
                     id="website"
-                    className="info-btn"
+                    className="px-4 py-2 w-20 flex items-center justify-center gap-2 bg-white rounded-full font-bold text-black cursor-pointer transition-all duration-300 hover:shadow-[0_0_10px] hover:shadow-blue-500"
                     title="Go to website"
                     onClick={handleLiveDemoRedirect}
                   >
+                    <p>Visit</p>
                     <i className="fa-solid fa-arrow-up-right-from-square"></i>
                   </div>
                 )}
+
               </div>
             </div>
             <div id="info-content">
@@ -248,19 +261,27 @@ function InfoContent() {
             </div>
           </div>
         </div>
-        <p id="more-content">Browse some more</p>
-        <Grid />
+        <div className="w-full items-center justify-center flex pt-20">
+          <p id="more-content">Browse some more</p>
+
+        </div>
+        <Grid query={query} />
+
       </div>
     </Suspense>
   );
 }
 
 export default function InfoPage() {
+  const [query, setQuery] = useState<string>('');
+
   return (
     <Suspense fallback={<div>Loading...</div>}>
       {/* Include NavbarHome at the top */}
-      <NavbarHome />
-      <InfoContent />
+      {/* <NavbarHome setQuery={setQuery} /> */}
+
+      <InfoContent query={query} />
+
     </Suspense>
   );
 }

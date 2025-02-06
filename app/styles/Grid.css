@@ -2,10 +2,13 @@
 * {
   margin: 0;
   padding: 0;
+  
 }
 
 body {
   height: 100vh; /* Ensure the body takes full height */
+
+  
 }
 
 /* Scrollable container styles */
@@ -20,11 +23,12 @@ body {
   margin-top: 70px; /* Adjust this to match the navbar's height */
   overflow-y: auto; /* Allows vertical scrolling if needed */
   height: calc(100vh - 70px);
+  
 }
 
 /* Pinterest-like grid styles */
 .pinterest-grid {
-  column-count: 3; /* Number of columns */
+  column-count: 4; /* Number of columns */
   column-gap: 30px; /* Gap between columns */
 }
 
@@ -37,7 +41,7 @@ body {
 }
 
 .grid-item img {
-  width: 100%;
+  width: 300px;
   height: auto;
   display: block;
   transition: 0.5s ease;
