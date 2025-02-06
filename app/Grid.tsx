@@ -1,10 +1,8 @@
 "use client";
 import React, { useState, useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-// import "./styles/Grid.css";
 import supabase from "@/utils/SupabaseClient";
 import { LinkIcon } from "lucide-react";
-
 
 interface Project {
   id: number;
@@ -28,7 +26,7 @@ function GridContent({ query }: { query: string }) {
 
   useEffect(() => {
     fetchProjects();
-  }, [query, currentRepoName]); // ✅ Re-fetch when query changes
+  }, [query, currentRepoName]);
 
   const fetchProjects = async () => {
     try {
@@ -40,7 +38,6 @@ function GridContent({ query }: { query: string }) {
       if (error) throw error;
 
       if (data) {
-        // Filter based on query
         const filteredProjects = data
           .filter(
             (project) =>
@@ -48,9 +45,9 @@ function GridContent({ query }: { query: string }) {
               project.repo_name !== currentRepoName &&
               (query
                 ? project.repo_name.toLowerCase().includes(query.toLowerCase()) ||
-                project.category.toLowerCase().includes(query.toLowerCase()) ||
-                project.description.toLowerCase().includes(query.toLowerCase())
-                : true) // Show all if query is empty
+                  project.category.toLowerCase().includes(query.toLowerCase()) ||
+                  project.description.toLowerCase().includes(query.toLowerCase())
+                : true)
           );
         setProjects(filteredProjects);
       }
@@ -84,39 +81,23 @@ function GridContent({ query }: { query: string }) {
           />
           <div className="bg-white flex gap-2 items-center p-3 sm:p-4 text-black">
             <LinkIcon size={16} className="flex-shrink-0" />
-            <h3 className="text-sm font-bold truncate">{project.repo_name}</h3>
+            <div className="flex flex-col w-full overflow-hidden">
+              <h3 className="text-sm font-bold truncate">{project.repo_name}</h3>
+              {project.live_demo && (
+                <p className="text-xs text-gray-600 truncate">{project.live_demo}</p>
+              )}
+            </div>
           </div>
         </div>
       ))}
-      {projects.map((project) => (
-        <div
-          key={project.id}
-          onClick={() => handleImageClick(project.repo_name)}
-          className="break-inside-avoid w-full shadow-lg overflow-hidden cursor-pointer hover:shadow-xl transition-shadow duration-300"
-        >
-          <img
-            src={project.images}
-            className="w-full h-auto object-cover"
-            alt={`Project ${project.repo_name}`}
-          />
-          <div className="bg-white flex gap-2 items-center p-3 sm:p-4 text-black">
-            <LinkIcon size={16} className="flex-shrink-0" />
-            <h3 className="text-sm font-bold truncate">{project.live_demo}</h3>
-          </div>
-        </div>
-      ))}
-
     </div>
-
-
-
   );
 }
 
 export default function Grid({ query }: { query: string }) {
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <GridContent query={query} /> {/* ✅ Pass query to GridContent */}
+      <GridContent query={query} />
     </Suspense>
   );
 }
