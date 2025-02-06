@@ -229,7 +229,7 @@ const SignUp = () => {
         <p className="mt-8 text-white">
           Already have an account?{" "}
           <Link 
-            href="/sign-in"
+            href="/signin"
             className="relative hover:after:w-full after:content-[''] after:absolute after:left-0 after:bottom-[-2px] after:w-0 after:h-[1px] after:bg-current after:transition-all after:duration-300"
           >
             Sign in
