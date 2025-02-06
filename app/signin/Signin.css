@@ -5,53 +5,19 @@
 }
 
 #sign-in-container {
-  width: 99vw;
+  width: 100%;
   height: 100vh;
   display: flex;
-  justify-self: center;
-  justify-content: space-between;
-  align-items: center;
-}
-
-#sign-in-container > #video-container {
-  width: 50%;
-  height: 98%;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  border-radius: 10px;
-  overflow: hidden;
-}
-
-#video-container > #video-content {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 20px;
-}
-
-#video-container > #video-content > video {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 90%;
-  height: 90%;
-  object-fit: cover;
-  z-index: -1;
-  border-radius: 10px;
+  padding: 0 20px;
+  box-sizing: border-box;
 }
 
 #auth-container {
-  width: 49.3%;
-  height: 98%;
+  width: 100%;
+  max-width: 450px;
+  height: auto;
   padding: 5% 0;
   display: flex;
   flex-direction: column;
@@ -62,18 +28,18 @@
 }
 
 #auth-container > img {
-  width: 100px;
+  width: 80px;
+  margin-bottom: 20px;
 }
 
 #auth-container > #auth-box {
-  width: 60%;
-  height: 75%;
-  margin-top: 12%;
+  width: 85%;
+  height: auto;
+  margin-top: 5%;
 }
 
 #auth-container > #auth-box > #our-creds {
   width: 100%;
-  height: 30%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -81,40 +47,40 @@
   position: relative;
 }
 
-#auth-container > #auth-box > #our-creds > input {
+.password-wrapper {
   width: 100%;
+  position: relative;
   margin-bottom: 30px;
+}
+
+.toggle-password {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  opacity: 0.7;
+}
+
+#auth-container > #auth-box > #our-creds > input,
+.password-wrapper > input {
+  width: 100%;
   padding: 18px;
-  padding-right: 50px; /* Space for the toggle icon */
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  padding-right: 50px;
   background: rgba(255, 255, 255, 0.082);
   font-size: 15px;
   color: white;
   border: none;
   border-radius: 10px;
-  position: relative; /* For positioning the toggle button */
+  box-sizing: border-box;
 }
 
-#auth-container > #auth-box > #our-creds > input:focus {
+#auth-container > #auth-box > #our-creds > input:focus,
+.password-wrapper > input:focus {
   outline: none;
-}
-
-#auth-container > #auth-box > #our-creds > #email {
-  margin-top: 30px;
-}
-
-input:-webkit-autofill,
-input:-webkit-autofill:hover, 
-input:-webkit-autofill:focus, 
-input:-webkit-autofill:active {
-  outline: none;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: white;
-  transition: background-color 5000s ease-in-out 0s;
-  box-shadow: inset 0 0 20px 20px #23232329;
 }
 
 #auth-container > #auth-box > #our-creds > #sign-in-btn {
@@ -135,7 +101,7 @@ input:-webkit-autofill:active {
 
 #auth-container > #auth-box > #hr-container {
   width: 100%;
-  margin-top: 90px;
+  margin-top: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -148,7 +114,6 @@ input:-webkit-autofill:active {
 
 #auth-container > #auth-box > #api-creds {
   width: 100%;
-  height: 27%;
   margin-top: 20px;
   display: flex;
   flex-direction: column;
@@ -181,7 +146,8 @@ input:-webkit-autofill:active {
 }
 
 #auth-container > .create-account {
-  margin-top: -8px;
+  margin-top: 20px;
+  text-align: center;
 }
 
 #auth-container > .create-account > #create-acc {
@@ -207,7 +173,43 @@ input:-webkit-autofill:active {
 
 .error-message {
   color: #ff4444;
-  margin-top: 50px;
+  margin-top: 20px;
   text-align: center;
   font-size: 14px;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 600px) {
+  #sign-in-container {
+    padding: 0 15px;
+  }
+
+  #auth-container {
+    width: 100%;
+    padding: 10% 0;
+  }
+
+  #auth-container > #auth-box {
+    width: 90%;
+  }
+
+  #auth-container > img {
+    width: 60px;
+  }
+
+  #auth-container > #auth-box > #hr-container {
+    margin-top: 30px;
+  }
+}
+
+/* Autofill styles */
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active {
+  outline: none;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: white;
+  transition: background-color 5000s ease-in-out 0s;
+  box-shadow: inset 0 0 20px 20px #23232329;
 }
