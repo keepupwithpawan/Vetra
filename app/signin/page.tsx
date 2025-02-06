@@ -111,85 +111,99 @@ export default function SignIn() {
   };
 
   return (
-    <div id="sign-in-container">
-      <div id="video-container">
-        <div id="video-content">
+    <div className="w-full min-h-screen flex flex-col lg:flex-row justify-between items-center p-4">
+      {/* Video container - hidden on mobile */}
+      <div className="hidden lg:flex w-1/2 h-[98vh] relative items-center justify-center rounded-lg overflow-hidden">
+        <div className="absolute inset-0 flex justify-center items-center rounded-lg">
           <video
             src="https://res.cloudinary.com/dwkbeovcw/video/upload/v1737741369/Sign-in_Video_urvjww.mp4"
+            className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[90%] h-[90%] object-cover rounded-lg"
             autoPlay
             muted
             loop
-          ></video>
+          />
         </div>
       </div>
 
-      <div id="auth-container">
-        <Image src={VetraLogo} alt="Floating 7" />
-        <form id="auth-box" onSubmit={submit}>
-          <div id="our-creds">
+      {/* Auth container */}
+      <div className="w-full lg:w-[49.3%] min-h-screen lg:h-[98vh] py-8 flex flex-col items-center justify-center rounded-lg bg-black">
+        <Image src={VetraLogo} alt="Vetra Logo" className="w-24" />
+        
+        <form className="w-full max-w-md px-6 mt-12" onSubmit={submit}>
+          <div className="space-y-6">
             <input
               type="email"
-              name="email"
               value={emailAddress}
               onChange={(e) => setEmailAddress(e.target.value)}
               placeholder="Email"
               disabled={isLoading}
               required
+              className="w-full p-4 bg-white/[.082] text-white rounded-lg focus:outline-none text-base"
             />
+            
             <input
-              id="password-input"
               type={showPassword ? "text" : "password"}
-              name="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Password"
               disabled={isLoading}
               required
+              className="w-full p-4 bg-white/[.082] text-white rounded-lg focus:outline-none text-base"
             />
-            <button type="submit" id="sign-in-btn">
+            
+            <button
+              type="submit"
+              className="w-full p-5 bg-white text-black font-bold rounded-lg hover:opacity-70 hover:rounded-[50px] transition-all duration-500"
+            >
               Explore Vetra
             </button>
           </div>
 
-          {error && <div className="error-message">{error}</div>}
+          {error && (
+            <div className="text-red-500 text-center text-sm mt-12">
+              {error}
+            </div>
+          )}
 
-          <div id="hr-container">
-            <hr className="signin-hr" />
-            <p>or</p>
-            <hr className="signin-hr" />
+          <div className="flex items-center justify-center space-x-4 mt-16">
+            <hr className="w-24 opacity-30" />
+            <span className="text-sm">or</span>
+            <hr className="w-24 opacity-30" />
           </div>
 
-          <div id="api-creds">
+          <div className="space-y-4 mt-6">
             <button
               type="button"
-              id="google"
-              className="api"
               onClick={() => handleOAuthSignIn("oauth_google", "Google")}
               disabled={isLoading}
+              className="w-full p-4 bg-white/[.082] text-white rounded-lg hover:bg-white hover:text-black transition-colors duration-500 flex items-center"
             >
-              <i className="fa-brands fa-google"></i>
-              <p>Sign In with Google</p>
+              <i className="fa-brands fa-google" />
+              <span className="ml-4">Sign In with Google</span>
             </button>
+            
             <button
               type="button"
-              id="github"
-              className="api"
               onClick={() => handleOAuthSignIn("oauth_github", "GitHub")}
               disabled={isLoading}
+              className="w-full p-4 bg-white/[.082] text-white rounded-lg hover:bg-white hover:text-black transition-colors duration-500 flex items-center"
             >
-              <i className="fa-brands fa-github"></i>
-              <p>Sign In with GitHub</p>
+              <i className="fa-brands fa-github" />
+              <span className="ml-4">Sign In with GitHub</span>
             </button>
           </div>
         </form>
 
-        <p className="create-account">
+        <p className="mt-6">
           or{" "}
-          <Link href="/signup" id="create-acc">
+          <Link 
+            href="/signup"
+            className="relative hover:after:w-full after:content-[''] after:absolute after:left-0 after:bottom-[-2px] after:w-0 after:h-[1px] after:bg-current after:transition-all after:duration-300"
+          >
             create an account
           </Link>
         </p>
       </div>
     </div>
   );
-}
+};
