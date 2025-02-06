@@ -55,3 +55,68 @@
   cursor: pointer;
   background: none;
 }
+
+@media (max-width: 1024px) {
+  #nav > #floating-bar {
+    width: 25%;
+  }
+
+  #nav > #floating-bar > #right > ul {
+    gap: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  #nav {
+    height: 10vh;
+    font-size: 13px;
+  }
+
+  #nav > #left {
+    font-size: 15px;
+    padding: 8px 14px;
+  }
+
+  #nav > #floating-bar {
+    width: 35%;
+  }
+
+  #nav > #floating-bar > #right {
+    padding: 10px 15px;
+  }
+
+  #nav > #floating-bar > #right > ul {
+    gap: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  #nav {
+    height: 8vh;
+    justify-content: space-between;
+    padding: 0 5%;
+  
+  }
+
+  #nav > #left {
+    font-size: 14px;
+    padding: 6px 12px;
+  }
+
+  #nav > #floating-bar {
+    width: 45%;
+  }
+
+  #nav > #floating-bar > #right {
+    padding: 8px 12px;
+    border-radius: 8px;
+  }
+
+  #nav > #floating-bar > #right > ul {
+    gap: 8px;
+  }
+
+  #nav > #floating-bar > #right > ul > li {
+    font-size: 12px;
+  }
+}

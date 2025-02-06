@@ -2,7 +2,7 @@
 #info-wrapper {
   width: 100%;
   min-height: 100vh;
-  padding-top: 80px;
+  padding-top: 60px;
   overflow-x: hidden;
   background-color: #030303;
   
@@ -33,6 +33,9 @@
 #info {
   flex: 1;
   color: white;
+  background-color: #121212;
+  padding: 20px;
+  border-radius: 12px;
 }
 
 #info-nav {

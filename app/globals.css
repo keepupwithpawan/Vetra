@@ -13,7 +13,9 @@
 * {
   margin: 0;
   padding: 0;
+
 }
+
 
 body {
   background-color: #030303;
@@ -132,10 +134,7 @@ body {
 
 
 #left {
-
-
   background: none;
-
   font-family: 'Melodrama', serif;
   font-size: 24px;
   background: white;
@@ -147,4 +146,34 @@ body {
   0 0 30px rgba(147, 62, 255, 0.5),
   0 0 50px rgba(147, 62, 255, 0.4),
   0 0 70px rgba(147, 62, 255, 0.3); /* All sides evenly */
+}
+
+
+#loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px; /* Adjust to maintain proportion */
+  height: 100px; /* Ensures perfect circle */
+  font-family: 'Melodrama', serif;
+  font-size: 50px; /* Adjust size for balance */
+  background: white;
+  color: black;
+  font-weight: bold;
+  border-radius: 50%; /* Makes it perfectly circular */
+  box-shadow: 
+    0 0 15px rgba(147, 62, 255, 0.6),
+    0 0 30px rgba(147, 62, 255, 0.5),
+    0 0 50px rgba(147, 62, 255, 0.4),
+    0 0 70px rgba(147, 62, 255, 0.3);
+  animation: blink 2s infinite ease-in-out; /* Slow blinking animation */
+}
+
+@keyframes blink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
 }

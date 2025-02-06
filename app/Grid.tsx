@@ -3,6 +3,7 @@ import React, { useState, useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import supabase from "@/utils/SupabaseClient";
 import { LinkIcon } from "lucide-react";
+import CircularLoader from "./components/CircularLoader";
 
 interface Project {
   id: number;
@@ -45,8 +46,8 @@ function GridContent({ query }: { query: string }) {
               project.repo_name !== currentRepoName &&
               (query
                 ? project.repo_name.toLowerCase().includes(query.toLowerCase()) ||
-                  project.category.toLowerCase().includes(query.toLowerCase()) ||
-                  project.description.toLowerCase().includes(query.toLowerCase())
+                project.category.toLowerCase().includes(query.toLowerCase()) ||
+                project.description.toLowerCase().includes(query.toLowerCase())
                 : true)
           );
         setProjects(filteredProjects);
@@ -63,11 +64,11 @@ function GridContent({ query }: { query: string }) {
   };
 
   if (loading) {
-    return <div className="bg-[#030303]">Loading projects...</div>;
+    return <div className="bg-[#030303]"><CircularLoader /></div>;
   }
 
   return (
-    <div className="columns-2 mt-8 md:mt-32 sm:columns-2 md:columns-3 lg:columns-4 bg-[#030303] md:gap-20 gap-12 md:mx-20 mx-4 max-w-8xl md:space-y-20 space-y-12">
+    <div className="columns-2 mt-8 mb-20 md:mt-32 sm:columns-2 md:columns-3 lg:columns-4 bg-[#030303] md:gap-20 gap-12 md:mx-20 mx-4 max-w-8xl md:space-y-20 space-y-12">
       {projects.map((project) => (
         <div
           key={project.id}
@@ -96,7 +97,7 @@ function GridContent({ query }: { query: string }) {
 
 export default function Grid({ query }: { query: string }) {
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<div><CircularLoader /></div>}>
       <GridContent query={query} />
     </Suspense>
   );

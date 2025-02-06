@@ -160,7 +160,10 @@ function InfoContent({ query }: { query: string }) {
   }
 
   if (!project) {
-    return <div className="bg-[#030303] w-full flex ic">Project not found</div>;
+    return <div className="bg-black flex-col gap-2 h-screen items-center justify-center w-full flex">
+      <p className="text-2xl">Project not found</p>
+      <a href="/grid" className="text-sm">Back to Home</a>
+    </div>;
   }
 
   const capitalizeFirstLetter = (string: string): string =>
@@ -171,7 +174,7 @@ function InfoContent({ query }: { query: string }) {
     : [];
 
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<div className="bg-[#030303]"><CircularLoader /></div>}>
       <Popup message={popup.message} visible={popup.visible} />
 
       <div id="info-wrapper">

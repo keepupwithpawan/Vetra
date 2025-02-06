@@ -11,7 +11,9 @@ const publicRoutes = createRouteMatcher([
     "/forgot-password", 
     '/sso-callback',
     '/sso-callback/(.*)',
-    '/error'
+    '/error',
+    '/about',
+    '/contact',
 ]);
 
 const adminRoutes = createRouteMatcher([
