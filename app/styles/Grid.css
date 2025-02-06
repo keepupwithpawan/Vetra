@@ -17,6 +17,9 @@ body {
   padding-right: 10px; /* Optional: Prevent content from touching the scrollbar */
   box-sizing: border-box; /* Include padding and border in width/height calculations */
   scrollbar-width: none;
+  margin-top: 70px; /* Adjust this to match the navbar's height */
+  overflow-y: auto; /* Allows vertical scrolling if needed */
+  height: calc(100vh - 70px);
 }
 
 /* Pinterest-like grid styles */

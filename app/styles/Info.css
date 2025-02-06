@@ -179,3 +179,7 @@
       transform: rotate(360deg);
     }
   }
+
+#info-wrapper {
+  padding-top: 65px; /* Adjust this value according to your navbar height */
+}

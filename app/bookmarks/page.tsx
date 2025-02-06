@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { useUser } from '@clerk/clerk-react';
 import supabase from '@/utils/SupabaseClient';
 import NavbarHome from '../components/NavbarHome';
-import './bookmarks.css'
+import './bookmarks.css';
 
 interface Project {
     id: number;
@@ -38,6 +38,7 @@ export default function BookmarksPage() {
     const [bookmarkedProjects, setBookmarkedProjects] = useState<Project[]>([]);
     const [loading, setLoading] = useState(true);
     const [popup, setPopup] = useState<PopupState>({ message: '', visible: false });
+    const [query, setQuery] = useState('');
 
     const getImageUrl = (imageUrl: string | null | undefined): string => {
         if (!imageUrl) return '/placeholder.png';
@@ -171,6 +172,7 @@ export default function BookmarksPage() {
 
     return (
         <>
+            <NavbarHome setQuery={setQuery} />
 
             {popup.visible && (
                 <div className="popup">

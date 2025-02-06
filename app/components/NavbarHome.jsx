@@ -19,7 +19,9 @@ export default function NavbarHome({ setQuery }) {
         router.push('/bookmarks');
         setIsMenuOpen(false);
     };
-
+    const aboutRedirect = () =>{
+        router.push('/about')
+    }
     const handleKeyPress = (e) => {
         if (e.key === 'Enter') {
             setQuery(inputValue.trim());
@@ -76,7 +78,9 @@ export default function NavbarHome({ setQuery }) {
                     </div>
 
                     <div className="flex items-center gap-6">
-                        <button className="text-gray-300 hover:text-white text-sm font-medium transition-colors">
+                        <button
+                        onClick={aboutRedirect}
+                         className="text-gray-300 hover:text-white text-sm font-medium transition-colors">
                             About
                         </button>
                         <button

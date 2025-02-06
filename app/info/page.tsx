@@ -1,7 +1,7 @@
 "use client";
 import React, { Suspense, useEffect, useState } from "react";
 import "../styles/Info.css";
-import NavbarHome from "../components/NavbarHome";
+import NavbarHome from "../components/NavbarHome"; // Import NavbarHome
 import Grid from "../Grid";
 import Image from "next/image";
 import loader from "../../public/assets/spinner.png";
@@ -9,6 +9,7 @@ import Popup from "../components/Popup";
 import supabase from "@/utils/SupabaseClient";
 import { useSearchParams } from "next/navigation";
 import { useUser } from "@clerk/clerk-react";
+import CircularLoader from "../components/CircularLoader"
 
 interface Project {
   id: number;
@@ -42,18 +43,26 @@ function InfoContent() {
   useEffect(() => {
     const fetchProjectData = async () => {
       try {
-        if (!repoName) return;
-
+        setLoading(true); // Ensure loading is set to true immediately
+    
+        // Artificial delay to make loader visible
+        await new Promise(resolve => setTimeout(resolve, 500)); // 1.5 seconds delay
+    
+        if (!repoName) {
+          setLoading(false);
+          return;
+        }
+    
         const { data: projectData, error: projectError } = await supabase
           .from("projects")
           .select("*")
           .eq("repo_name", repoName)
           .single();
-
+    
         if (projectError) throw projectError;
-
+    
         setProject(projectData as Project);
-
+    
         // Check if project is bookmarked
         if (user?.id && projectData.id) {
           const { data: bookmark } = await supabase
@@ -62,11 +71,16 @@ function InfoContent() {
             .eq("user_id", user.id)
             .eq("project_id", projectData.id)
             .single();
-
+    
           setIsBookmarked(!!bookmark);
         }
       } catch (error) {
         console.error("Error fetching project:", error);
+        // Optional: set an error state or show error popup
+        setPopup({
+          message: "Failed to load project",
+          visible: true
+        });
       } finally {
         setLoading(false);
       }
@@ -142,11 +156,7 @@ function InfoContent() {
   };
 
   if (loading) {
-    return (
-      <div id="loading">
-        <Image src={loader} alt="Loading..." />
-      </div>
-    );
+    return <CircularLoader size={60} color="#FF0000" />
   }
 
   if (!project) {
@@ -185,15 +195,10 @@ function InfoContent() {
                 <div
                   id="collection"
                   className="info-btn"
-                  title={
-                    isBookmarked ? "Remove from Bookmarks" : "Add to Bookmarks"
-                  }
+                  title={isBookmarked ? "Remove from Bookmarks" : "Add to Bookmarks"}
                   onClick={handleBookmarkToggle}
                 >
-                  <i
-                    className={`fa-${isBookmarked ? "solid" : "regular"
-                      } fa-bookmark`}
-                  ></i>
+                  <i className={`fa-${isBookmarked ? "solid" : "regular"} fa-bookmark`}></i>
                 </div>
                 {project.live_demo && (
                   <div
@@ -253,6 +258,8 @@ function InfoContent() {
 export default function InfoPage() {
   return (
     <Suspense fallback={<div>Loading...</div>}>
+      {/* Include NavbarHome at the top */}
+      <NavbarHome />
       <InfoContent />
     </Suspense>
   );

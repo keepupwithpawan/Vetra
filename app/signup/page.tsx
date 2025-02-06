@@ -117,9 +117,9 @@ function SignUp() {
 
     return (
         <div id="sign-in-container">
-            <div id="video-container">
-                <Image src={VetraV} alt="Floating 7" width={500} height={500} />
-            </div>
+            <div id="video-content">
+          <video src="https://res.cloudinary.com/dwkbeovcw/video/upload/v1737741369/Sign-in_Video_urvjww.mp4" autoPlay muted loop></video>
+        </div>
 
             <div id="auth-container">
                 <Image src={VetraLogo} alt="Vetra Logo" width={500} height={500} />

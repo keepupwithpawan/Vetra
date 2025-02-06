@@ -8,7 +8,7 @@ export default function MainOne({ onTransition }) {
   const navigate = useRouter(); // Hook for navigation
 
   const handleRedirect = () => {
-    navigate.push("/home"); // Redirect to /home
+    navigate.push("/signup"); // Redirect to /home
   };
 
   const [isTransitioning, setIsTransitioning] = useState(false);

@@ -1,188 +1,147 @@
-.vetra-signup-container {
-  width: 99vw;
-  height: 100vh;
-  display: flex;
-  justify-self: center;
-  justify-content: space-between;
-  align-items: center;
+.signin-hr {
+  height: 0;
+  width: 65%;
+  opacity: 30%;
 }
 
-.vetra-video-container {
-  width: 50%;
-  height: 98%;
-  position: relative;
+#sign-in-container {
+  width: 100vw;
+  height: 100vh;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 20px;
+  background-color: #000;
+}
+
+#video-container {
+  width: 50%;
+  height: 95%;
+  display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 10px;
   overflow: hidden;
 }
 
-.vetra-video-content {
-  position: absolute;
-  top: 0;
-  left: 0;
+#video-container img {
   width: 100%;
   height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 20px;
-}
-
-.vetra-video-content video {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 90%;
-  height: 90%;
   object-fit: cover;
-  z-index: -1;
   border-radius: 10px;
 }
 
-.vetra-auth-container {
-  width: 49.3%;
-  height: 98%;
-  padding: 5% 0;
+#auth-container {
+  width: 45%;
+  height: 95%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border-radius: 10px;
   background-color: black;
+  padding: 20px;
+  border-radius: 10px;
 }
 
-.vetra-auth-container img {
-  width: 100px;
+#auth-box {
+  width: 80%;
 }
 
-.vetra-auth-box {
-  width: 60%;
-  height: 75%;
-  margin-top: 12%;
-}
-
-.vetra-credentials input {
+#our-creds {
   width: 100%;
-  margin-bottom: 30px;
-  padding: 18px;
-  padding-right: 50px; /* Space for the toggle icon */
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background: rgba(255, 255, 255, 0.082);
-  font-size: 15px;
-  color: white;
-  border: none;
-  border-radius: 10px;
-  position: relative; /* For positioning the toggle button */
+  gap: 15px;
+  margin-bottom: 20px;
 }
 
-.vetra-credentials input:focus {
+#our-creds input {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  color: white;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  border-radius: 8px;
+}
+
+#our-creds input:focus {
   outline: none;
 }
 
-/* Override autofill background */
-input:-webkit-autofill,
-input:-webkit-autofill:hover,
-input:-webkit-autofill:focus,
-input:-webkit-autofill:active {
-  background: rgba(255, 255, 255, 0.082) !important; /* Same as default */
-  color: white !important; /* Maintain text color */
-  -webkit-text-fill-color: white !important; /* For autofill text color */
-  transition: background-color 5000s ease-in-out 0s; /* Smooth transition */
-}
-
-.vetra-credentials .vetra-submit-btn {
-  cursor: pointer;
-  width: 100%;
-  padding: 20px;
-  background-color: white;
-  color: black;
-  font-weight: bold;
-  border-radius: 10px;
-  transition: opacity 0.5s ease, border-radius 0.5s ease;
-}
-
-.vetra-credentials .vetra-submit-btn:hover {
-  opacity: 70%;
-  border-radius: 50px;
-}
-
-.vetra-divider {
+.password-input-container {
   display: flex;
   align-items: center;
-  gap: 10px;
-  margin: 20px 0;
-}
-
-.vetra-divider hr {
-  width: 45%;
-  border: none;
-  height: 1px;
-  background: rgba(255, 255, 255, 0.3);
-}
-
-.vetra-divider p {
-  font-size: 14px;
-  color: rgba(255, 255, 255, 0.7);
-}
-
-.vetra-oauth-methods .vetra-oauth-btn {
-  cursor: pointer;
-  width: 100%;
-  margin-top: 18px;
-  padding: 18px;
-  display: flex;
-  align-items: center;
-  background: rgba(255, 255, 255, 0.082);
-  font-size: 15px;
-  color: white;
-  border: none;
-  border-radius: 10px;
-  transition: background-color 0.5s ease, color 0.5s ease;
-}
-
-.vetra-oauth-methods .vetra-oauth-btn:hover {
-  background: #fff;
-  color: #000;
-}
-
-.vetra-oauth-methods .vetra-oauth-btn p {
-  margin-left: 20px;
-}
-
-.vetra-error-message {
-  color: #ff4444;
-  text-align: center;
-  font-size: 14px;
-}
-
-.vetra-account-link {
-  margin-top: 40px;
-}
-
-.vetra-account-link .vetra-signin-link {
   position: relative;
-  cursor: pointer;
-  transition: color 0.3s ease;
 }
 
-.vetra-account-link .vetra-signin-link::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  bottom: -2px;
-  width: 0;
-  height: 1px;
-  background-color: currentColor;
-  transition: width 0.3s ease-in-out;
-}
-
-.vetra-account-link .vetra-signin-link:hover::after {
+.password-input-container input {
   width: 100%;
+  padding-right: 40px;
+}
+
+.password-toggle {
+  position: absolute;
+  right: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+#sign-in-btn {
+  width: 100%;
+  padding: 15px;
+  font-size: 16px;
+  font-weight: bold;
+  background: white;
+  color: black;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+#sign-in-btn:hover {
+  background: grey;
+}
+
+.error-message {
+  color: red;
+  font-size: 14px;
+  margin-top: 10px;
+  text-align: center;
+}
+#api-creds {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+}
+
+.api {
+  width: 100%;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.api i {
+  margin-right: 10px;
+  font-size: 18px;
+}
+
+.api:hover {
+  background: white;
+  color: black;
 }
