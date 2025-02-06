@@ -316,7 +316,6 @@ html, body {
     margin-bottom: 1.5rem;
     color: white;
     text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
-    border-bottom: 3px solid black;
     display: inline-block;
     padding-bottom: 0.5rem;
 }
