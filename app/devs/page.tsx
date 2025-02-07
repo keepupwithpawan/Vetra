@@ -28,20 +28,38 @@ const Devs = () => {
                 </div>
             </div>
 
-            <div id="about-footer">
-                <div id="bottom">
-                    <div id="bottom-t">
-                        <p>© 2025 Vetra - All Rights Reserved</p>
-                        <div id="links">
-                            <ul>
-                                <li>LinkedIn</li>
-                                <li>Instagram</li>
-                                <li>Twitter</li>
+            <div className="w-full h-[80%] flex items-end justify-end overflow-hidden">
+
+                <div className="w-full h-[50vh] bg-white text-black rounded-t-[30px] shadow-[0_0_40px_rgba(255,255,255,0.2)] flex flex-col items-center justify-between p-6">
+                    {/* Top Section */}
+                    <div className="w-full flex flex-col items-center">
+                        <p className="text-lg font-bold">©️ 2025 Vetra - All Rights Reserved</p>
+                        <div className="mt-5">
+                            <ul className="flex gap-6 text-lg font-bold">
+                                <li className="relative cursor-pointer after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2px] after:bg-black after:scale-x-0 after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left">
+                                    <a href="https://www.linkedin.com/company/vetra-dev/">
+                                        LinkedIn</a>
+
+                                </li>
+                                <li className="relative cursor-pointer after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2px] after:bg-black after:scale-x-0 after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left">
+                                    <a href="https://www.instagram.com/vetra_dev?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer">
+                                        Instagram
+                                    </a>
+                                </li>
+                                <li className="relative cursor-pointer after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2px] after:bg-black after:scale-x-0 after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left">
+                                    <a href="https://x.com/vetra_dev" target="_blank" rel="noopener noreferrer">
+                                        Twitter
+                                    </a>
+                                </li>
                             </ul>
                         </div>
                     </div>
-                    <div id="bottom-b">
-                        <h4>VETRA</h4>
+
+                    {/* Bottom Section */}
+                    <div className="flex items-center justify-center ">
+                        <h4 className="md:text-[200px] text-[100px] font-bold text-black md:mb-[-130px] ">
+                            VETRA
+                        </h4>
                     </div>
                 </div>
             </div>

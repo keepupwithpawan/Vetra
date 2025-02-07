@@ -1,235 +1,422 @@
 .about-hr {
-    width: 40vw;
-    margin-top: 12vh;
-    border: 1px solid white;
+  width: 40vw;
+  margin-top: 12vh;
+  border: 1px solid white;
+
 }
 
 #about-container {
-    width: 100vw;
-    height: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-family: 'General Sans', sans-serif;
-    overflow: scroll;
-    /* background-color: red; */
+  width: 100vw;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'General Sans', sans-serif;
+  overflow: scroll;
+  /* background-color: red; */
 }
 
 #about-container > #header {
-    width: 75%;
-    height: 40%;
-    margin-top: 5vh;
-    padding: 80px 60px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: white;
-    color: black;
-    border-radius: 5px;
+  width: 75%;
+  height: 40%;
+  margin-top: 5vh;
+  padding: 80px 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  color: black;
+  border-radius: 5px;
 }
 
-#about-container > #header > #left {
-    width: 50%;
+#about-container > #header > #left-container {
+  width: 50%;
 }
 
-#about-container > #header > #left > h1 {
-    font-family: 'General Sans', sans-serif;
-    font-size: 75px;
-    font-weight: bolder;
+#about-container > #header > #left-container > h1 {
+  font-family: 'General Sans', sans-serif;
+  font-size: 75px;
+  font-weight: bolder;
 }
 
 #about-container > #header > #right {
-    width: 50%;
+  width: 50%;
 }
 
 #about-container > #header > #right > p {
-    font-size: 20px;
-    font-weight: bold;
-    text-align: justify;
-    opacity: 75%;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: justify;
+  opacity: 75%;
 }
 
-#about-container > #header > #devs {
-    cursor: pointer;
-    position: absolute;
-    top: 79%;
-    padding: 7px 15px;
-    background-color: #933EFF;
-    color: white;
-    font-size: 14px;
-    font-weight: bold;
-    border-radius: 50px;
-    transition: background-color 0.5s, color 0.5s, border 1s, transform 0.5s;
+#devs {
+  cursor: pointer;
+  position: absolute;
+  top: 80%;
+  padding: 7px 15px;
+  background-color: #933EFF;
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 50px;
+  transition: background-color 0.5s, color 0.5s, border 1s, transform 0.5s;
 }
-
-#about-container > #header > #devs:hover {
-    background-color: black;
-    color: white;
-    border: 1px solid rgb(255, 255, 255, 0.3);
-    transform: scaleX(0.99) scaleY(0.99);
+#devs:hover {
+  background-color: black;
+  color: white;
+  border: 1px solid rgb(255, 255, 255, 0.3);
+  transform: scaleX(0.99) scaleY(0.99);
 }
 
 #feature-container {
-    width: 80%;
-    height: 40vh;
-    margin-top: 10vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    /* background-color: white; */
-    color: black;
-    border-radius: 20px;
+  width: 80%;
+  height: 40vh;
+  /* margin-top: 20vh; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* background-color: white; */
+  color: black;
+  border-radius: 20px;
+  margin-bottom: 100px;
 }
 
 #feature-container > #feature-container-header {
-    width: 100%;
-    height: 20%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /* background-color: red; */
+  width: 100%;
+  height: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* background-color: red; */
 }
 
 #feature-container > #feature-container-header > h1 {
-    font-family: 'General Sans', sans-serif;
-    font-size: 40px;
-    font-weight: bolder;
-    color: white;
-    text-shadow: none;
+  font-family: 'General Sans', sans-serif;
+  font-size: 40px;
+  font-weight: bolder;
+  color: white;
+  text-shadow: none;
 }
 
 #feature-container > #feature-container-grid {
-    width: 100%;
-    height: 80%;
-    display: flex;
-    justify-content: space-between;
-    /* background-color: green; */
+  width: 100%;
+  height: 80%;
+  display: flex;
+  justify-content: space-between;
+  /* background-color: green; */
 }
 
 #feature-container > #feature-container-grid > .feature {
-    width: 22%;
-    height: 95%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: white;
-    color: black;
-    border-radius: 5px;
+  width: 22%;
+  height: 95%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  color: black;
+  border-radius: 5px;
 }
 
 #feature-container > #feature-container-grid > .feature > p {
-    width: 90%;
-    margin-top: 30px;
-    font-size: 17px;
-    font-weight: bold;
-    text-align: center;
+  width: 90%;
+  margin-top: 30px;
+  font-size: 17px;
+  font-weight: bold;
+  text-align: center;
 }
 
 #about-footer {
-    width: 100vw;
-    height: 35vh;
-    overflow: hidden;
+  width: 100vw;
+  height: 34vh;
+  overflow: hidden;
 }
 
 /* Bottom section */
 #bottom {
-  width: 100%;
-  height: 50vh;
-  border-radius: 30px 30px 0 0;
-  background: white;
-  color: black;
-  box-shadow:
-    0 0 40px rgba(255, 255, 255, 0.2), /* Intensified glow */
-    0 0 50px rgba(255, 255, 255, 0.2),
-    0 0 60px rgba(255, 255, 255, 0.2),
-    0 0 7px rgba(255, 255, 255, 0.2);
+width: 100%;
+height: 50vh;
+border-radius: 30px 30px 0 0;
+background: white;
+color: black;
+box-shadow:
+  0 0 40px rgba(255, 255, 255, 0.2), /* Intensified glow */
+  0 0 50px rgba(255, 255, 255, 0.2),
+  0 0 60px rgba(255, 255, 255, 0.2),
+  0 0 7px rgba(255, 255, 255, 0.2);
 }
 
 /* Styling for the top part of the bottom section */
 #bottom > #bottom-t {
-  width: 70%;
-  height: 35%;
-  display: flex;
-  flex-direction: column;
-  justify-self: center;
-  justify-content: center;
-  align-items: center;
+width: 70%;
+height: 35%;
+display: flex;
+flex-direction: column;
+justify-self: center;
+justify-content: center;
+align-items: center;
 }
 
 /* Links container */
 #bottom > #bottom-t > #links {
-  width: 40%;
-  height: 20%;
-  margin-top: 45px;
+width: 40%;
+height: 20%;
+margin-top: 45px;
 }
 
 /* Styling the list of social links */
 #bottom > #bottom-t > #links > ul {
-  display: flex;
-  justify-content: space-between;
+display: flex;
+justify-content: space-between;
 }
 
 /* Styling for individual list items */
 #bottom > #bottom-t > #links > ul > li {
-  cursor: pointer;
-  list-style: none;
-  font-weight: bold;
-  text-decoration: none;  /* Remove default underline */
-  position: relative;
-  overflow: hidden;  /* Hide the underline until it appears */
+cursor: pointer;
+list-style: none;
+font-weight: bold;
+text-decoration: none;  /* Remove default underline */
+position: relative;
+overflow: hidden;  /* Hide the underline until it appears */
 }
 
 /* Create the underline effect on hover */
 #bottom > #bottom-t > #links > ul > li::after {
-  content: '';  /* Empty content for the pseudo-element */
-  position: absolute;
-  bottom: 0;  /* Position at the bottom of the list item */
-  left: 0;
-  width: 100%;
-  height: 2px;  /* Underline thickness */
-  background-color: black;  /* Underline color */
-  transform: scaleX(0);  /* Initially set to 0 (hidden) */
-  transform-origin: bottom right;  /* Start the scaling from right to left */
-  transition: transform 0.3s ease;  /* Smooth transition for the underline */
+content: '';  /* Empty content for the pseudo-element */
+position: absolute;
+bottom: 0;  /* Position at the bottom of the list item */
+left-container: 0;
+width: 100%;
+height: 2px;  /* Underline thickness */
+background-color: black;  /* Underline color */
+transform: scaleX(0);  /* Initially set to 0 (hidden) */
+transform-origin: bottom right;  /* Start the scaling from right to left-container */
+transition: transform 0.3s ease;  /* Smooth transition for the underline */
 }
 
 /* Show underline on hover */
 #bottom > #bottom-t > #links > ul > li:hover::after {
-  transform: scaleX(1);  /* Make the underline appear from left to right */
-  transform-origin: bottom left;  /* Make it grow from left to right */
+transform: scaleX(1);  /* Make the underline appear from left-container to right */
+transform-origin: bottom left-container;  /* Make it grow from left-container to right */
 }
 
 /* Styling for the copyright text */
 #bottom > #bottom-t > p {
-  margin-top: 50px;
-  font-size: 17px;
-  font-weight: bold;
+margin-top: 50px;
+font-size: 17px;
+font-weight: bold;
 }
 
 /* Bottom-right section with the large VETRA text */
 #bottom > #bottom-b {
-  width: 100%;
-  height: 35%;
-  display: flex;
-  justify-self: center;
-  justify-content: center;
-  align-items: center;
+width: 100%;
+height: 35%;
+display: flex;
+justify-self: center;
+justify-content: center;
+align-items: center;
+overflow:hidden
 }
 
 /* Styling for the large VETRA heading */
 #bottom > #bottom-b > h4 {
-  font-size: 200px;
-  margin-bottom: -130px;
-  text-shadow:
-    0 0 3px rgba(255, 255, 255, 1), /* Very faint glow */
-    0 0 5px rgba(255, 255, 255, 0.8);
+font-size: 200px;
+margin-bottom: -130px;
+text-shadow:
+  0 0 3px rgba(255, 255, 255, 1), /* Very faint glow */
+  0 0 5px rgba(255, 255, 255, 0.8);
 }
 
 /* Styling for any icons inside the bottom section */
 #bottom > #bottom-b > i {
-  font-size: 50px;
-  text-shadow:
-    0 0 3px rgba(255, 255, 255, 1), /* Very faint glow */
-    0 0 5px rgba(255, 255, 255, 0.8);
+font-size: 50px;
+text-shadow:
+  0 0 3px rgba(255, 255, 255, 1), /* Very faint glow */
+  0 0 5px rgba(255, 255, 255, 0.8);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  #about-container > #header {
+    flex-direction: column;
+    text-align: center;
+    padding: 60px 40px;
+  }
+
+  #about-container > #header > #left-container {
+    width: 100%;
+  }
+
+  #about-container > #header > #right {
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  #about-container > #header > #left-container > h1 {
+    font-size: 50px;
+  }
+
+  #about-container > #header > #right > p {
+    font-size: 18px;
+  }
+
+  #about-container > #header > #devs {
+    top: 90%;
+  }
+
+  #feature-container {
+    height: auto;
+
+  margin-bottom: 100px;
+
+  }
+
+  #feature-container > #feature-container-grid {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  #feature-container > #feature-container-grid > .feature {
+    width: 45%;
+    height: auto;
+    padding: 20px;
+  }
+
+  #bottom {
+    height: auto;
+    padding: 20px;
+  }
+
+  #bottom > #bottom-t {
+    width: 100%;
+  }
+
+  #bottom > #bottom-t > #links {
+    width: 80%;
+  }
+
+  #bottom > #bottom-b > h4 {
+    font-size: 100px;
+    margin-bottom: -50px;
+  }
+}
+
+@media (max-width: 768px) {
+  #about-container > #header > #left-container > h1 {
+    font-size: 40px;
+  }
+
+  #about-container > #header > #right > p {
+    font-size: 16px;
+  }
+
+  #about-container > #header > #devs {
+    font-size: 12px;
+    padding: 5px 10px;
+  }
+
+  #feature-container > #feature-container-grid {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #feature-container > #feature-container-grid > .feature {
+    width: 80%;
+  }
+
+  #bottom > #bottom-t > p {
+    font-size: 14px;
+  }
+
+  #bottom > #bottom-b > h4 {
+    font-size: 80px;
+  }
+}
+
+@media (max-width: 480px) {
+  #about-container > #header {
+    padding: 40px 20px;
+  }
+
+  #about-container > #header > #left-container > h1 {
+    font-size: 30px;
+  }
+
+  #about-container > #header > #right > p {
+    font-size: 14px;
+  }
+
+  #feature-container {
+    width: 90%;
+    margin-bottom: 100px;
+  }
+
+  #feature-container > #feature-container-grid > .feature {
+    width: 100%;
+  }
+
+  #bottom > #bottom-b > h4 {
+    font-size: 60px;
+  }
+}
+
+
+@media (max-width: 1024px) {
+  #bottom {
+    height: auto;
+    padding: 20px;
+  }
+
+  #bottom > #bottom-t {
+    width: 100%;
+    height: auto;
+    padding: 20px;
+  }
+
+  #bottom > #bottom-t > #links {
+    width: 80%;
+  }
+
+  #bottom > #bottom-b {
+    height: auto;
+    text-align: center;
+  }
+
+  #bottom > #bottom-b > h4 {
+    font-size: 100px;
+    margin-bottom: -50px;
+  }
+}
+
+@media (max-width: 768px) {
+  #bottom > #bottom-t > #links {
+    width: 90%;
+  }
+
+  #bottom > #bottom-t > p {
+    font-size: 14px;
+    text-align: center;
+  }
+
+  #bottom > #bottom-b > h4 {
+    font-size: 80px;
+    margin-bottom: -40px;
+  }
+}
+
+@media (max-width: 480px) {
+  #bottom > #bottom-t {
+    padding: 10px;
+  }
+
+  #bottom > #bottom-t > p {
+    font-size: 12px;
+  }
+
+  #bottom > #bottom-b > h4 {
+    font-size: 60px;
+    margin-bottom: -30px;
+  }
 }

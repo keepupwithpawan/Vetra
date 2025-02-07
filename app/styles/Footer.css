@@ -200,3 +200,44 @@
     0 0 3px rgba(255, 255, 255, 1), /* Very faint glow */
     0 0 5px rgba(255, 255, 255, 0.8);
 }
+
+
+#asap {
+  position: absolute;
+  top: 34%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  z-index: 0;
+  opacity: 0;
+  transition: opacity 1s ease;
+  width: 100%;
+  color: white;
+}
+
+#asap.fade-in {
+  opacity: 1;
+}
+
+#asap > h1 {
+  font-size: 15vw;
+  margin-left: 20vw;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 1024px) {
+  #asap > h1 {
+    font-size: 12vw;
+    margin-left: 10vw;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  #asap > h1 {
+    font-size: 10vw;
+    margin-left: 5vw;
+  }
+}
