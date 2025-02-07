@@ -44,9 +44,21 @@ export default function Footer() {
           <p>© 2024 Vetra - All Rights Reserved</p>
           <div id="links">
             <ul>
-              <li>LinkedIn</li>
-              <li>Instagram</li>
-              <li>Twitter</li>
+              <li>
+                <a href="https://www.linkedin.com/company/vetra-dev/" target="_blank" rel="noopener noreferrer">
+                  LinkedIn
+                </a>
+              </li>
+              <li>
+                <a href="https://www.instagram.com/vetra_dev?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer">
+                  Instagram
+                </a>
+              </li>
+              <li>
+                <a href="https://x.com/vetra_dev" target="_blank" rel="noopener noreferrer">
+                  Twitter
+                </a>
+              </li>
             </ul>
           </div>
         </div>
