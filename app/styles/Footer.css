@@ -1,74 +1,70 @@
-/* Top section */
+/* Base styles */
 #top {
   width: 100%;
   height: 65vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: transform 1s ease; /* Smooth transition for rotation */
+  transition: transform 1s ease;
 }
 
 .rotate {
-  animation: rotate180 2s ease forwards; /* Animation for 180 degree rotation */
+  animation: rotate180 2s ease forwards;
 }
 
 .rotate-full {
-  animation: rotate360 2s ease forwards; /* Animation for 360 degree rotation */
+  animation: rotate360 2s ease forwards;
 }
 
-/* 180 degrees rotation with translation to the left (no Y-axis movement) */
 @keyframes rotate180 {
   0% {
-    transform: rotate(0deg) translateX(0); /* Initial state, no translation */
+    transform: rotate(0deg) translateX(0);
   }
   50% {
     transform: translateX(100px);
   }
   100% {
-    transform: rotate(180deg) translateX(200px); /* End state with 40px translation on X-axis */
+    transform: rotate(180deg) translateX(200px);
   }
 }
 
-/* Full 360 degrees rotation like a fidget spinner */
 @keyframes rotate360 {
   0% {
-    transform: rotate(180deg) translateX(200px); /* Start from 180 degrees */
+    transform: rotate(180deg) translateX(200px);
   }
   50% {
     transform: translateX(0px);
   }
   100% {
-    transform: rotate(360deg) translateX(0); /* End at 360 degrees */
+    transform: rotate(360deg) translateX(0);
   }
 }
 
 #top > h1 {
-  background: none;
+  background: white;
   font-family: 'Melodrama', serif;
   font-size: 300px;
-  background: white;
   color: black;
   font-weight: bold;
   padding: 10px 100px;
   border-radius: 50%;
   box-shadow:
-    0 0 50px rgba(147, 62, 255, 0.6),  /* Subtle purple glow */
+    0 0 50px rgba(147, 62, 255, 0.6),
     0 0 70px rgba(147, 62, 255, 0.5),
     0 0 100px rgba(147, 62, 255, 0.4),
-    0 0 150px rgba(147, 62, 255, 0.3); /* All sides evenly */
+    0 0 150px rgba(147, 62, 255, 0.3);
   transition: box-shadow 0.7s ease, background-color 0.5s ease, color 0.5s ease;
   z-index: 2;
 }
 
 #top > h1:hover {
   cursor: pointer;
-  /* background-color: #933EFF; */
   color: black;
   box-shadow:
-    0 0 40px rgba(255, 255, 255, 0.6),  /* Subtle purple glow */
+    0 0 40px rgba(255, 255, 255, 0.6),
     0 0 70px rgba(255, 255, 255, 0.6),
     0 0 150px rgba(255, 255, 255, 0.6),
-    0 0 200px rgba(255, 255, 255, 0.6); /* All sides evenly */
+    0 0 200px rgba(255, 255, 255, 0.6);
 }
 
 #asap {
@@ -80,17 +76,15 @@
   justify-content: center;
   align-items: center;
   text-align: center;
-  z-index: 5;
   color: white;
-  background: none;
   width: 100%;
   z-index: 0;
-  opacity: 0; /* Initially hidden */
-  transition: opacity 1s ease; /* Transition for fade-in effect */
+  opacity: 0;
+  transition: opacity 1s ease;
 }
 
 #asap.fade-in {
-  opacity: 1; /* Fully visible after fade-in */
+  opacity: 1;
 }
 
 #asap > h1 {
@@ -98,8 +92,6 @@
   font-size: 300px;
 }
 
-
-/* Bottom section */
 #bottom {
   width: 100%;
   height: 50vh;
@@ -107,101 +99,160 @@
   background: white;
   color: black;
   box-shadow:
-    0 0 40px rgba(255, 255, 255, 0.2), /* Intensified glow */
+    0 0 40px rgba(255, 255, 255, 0.2),
     0 0 50px rgba(255, 255, 255, 0.2),
     0 0 60px rgba(255, 255, 255, 0.2),
     0 0 7px rgba(255, 255, 255, 0.2);
 }
 
-/* Styling for the top part of the bottom section */
 #bottom > #bottom-t {
   width: 70%;
   height: 35%;
   display: flex;
   flex-direction: column;
-  justify-self: center;
   justify-content: center;
   align-items: center;
+  margin: 0 auto;
 }
 
-/* Links container */
 #bottom > #bottom-t > #links {
   width: 40%;
   height: 20%;
   margin-top: 45px;
 }
 
-/* Styling the list of social links */
 #bottom > #bottom-t > #links > ul {
   display: flex;
   justify-content: space-between;
+  padding: 0;
 }
 
-/* Styling for individual list items */
 #bottom > #bottom-t > #links > ul > li {
   cursor: pointer;
   list-style: none;
   font-weight: bold;
-  text-decoration: none;  /* Remove default underline */
+  text-decoration: none;
   position: relative;
-  overflow: hidden;  /* Hide the underline until it appears */
+  overflow: hidden;
 }
 
-/* Create the underline effect on hover */
 #bottom > #bottom-t > #links > ul > li::after {
-  content: '';  /* Empty content for the pseudo-element */
+  content: '';
   position: absolute;
-  bottom: 0;  /* Position at the bottom of the list item */
+  bottom: 0;
   left: 0;
   width: 100%;
-  height: 2px;  /* Underline thickness */
-  background-color: black;  /* Underline color */
-  transform: scaleX(0);  /* Initially set to 0 (hidden) */
-  transform-origin: bottom right;  /* Start the scaling from right to left */
-  transition: transform 0.3s ease;  /* Smooth transition for the underline */
+  height: 2px;
+  background-color: black;
+  transform: scaleX(0);
+  transform-origin: bottom right;
+  transition: transform 0.3s ease;
 }
 
-/* Show underline on hover */
 #bottom > #bottom-t > #links > ul > li:hover::after {
-  transform: scaleX(1);  /* Make the underline appear from left to right */
-  transform-origin: bottom left;  /* Make it grow from left to right */
+  transform: scaleX(1);
+  transform-origin: bottom left;
 }
 
-/* Styling for the copyright text */
 #bottom > #bottom-t > p {
   margin-top: 50px;
   font-size: 17px;
   font-weight: bold;
 }
 
-/* Bottom-right section with the large VETRA text */
 #bottom > #bottom-b {
   width: 100%;
   height: 35%;
   display: flex;
-  justify-self: center;
   justify-content: center;
   align-items: center;
 }
 
-/* Styling for the large VETRA heading */
 #bottom > #bottom-b > h4 {
   font-size: 200px;
   margin-bottom: -130px;
   text-shadow:
-    0 0 3px rgba(255, 255, 255, 1), /* Very faint glow */
+    0 0 3px rgba(255, 255, 255, 1),
     0 0 5px rgba(255, 255, 255, 0.8);
 }
 
-/* Styling for any icons inside the bottom section */
-#bottom > #bottom-b > i {
-  font-size: 50px;
-  text-shadow:
-    0 0 3px rgba(255, 255, 255, 1), /* Very faint glow */
-    0 0 5px rgba(255, 255, 255, 0.8);
+/* Responsive Design */
+@media screen and (max-width: 1200px) {
+  #top > h1 {
+    font-size: 200px;
+    padding: 10px 60px;
+  }
+
+  #asap > h1 {
+    font-size: 200px;
+    margin-left: 250px;
+  }
+
+  #bottom > #bottom-b > h4 {
+    font-size: 150px;
+    margin-bottom: -100px;
+  }
 }
-@media screen and (max-width: 600px) {
+
+@media screen and (max-width: 768px) {
+  #top {
+    height: 40vh;
+  }
+
+  #top > h1 {
+    font-size: 120px;
+    padding: 10px 40px;
+  }
+
   #asap {
-    display: none !important;
+    display: none; /* Hide ASAP text on mobile */
+  }
+
+  #bottom {
+    height: auto;
+    padding: 30px 0;
+  }
+
+  #bottom > #bottom-t {
+    width: 90%;
+    height: auto;
+  }
+
+  #bottom > #bottom-t > #links {
+    width: 80%;
+    margin-top: 30px;
+  }
+
+  #bottom > #bottom-t > p {
+    margin-top: 30px;
+    font-size: 14px;
+    text-align: center;
+  }
+
+  #bottom > #bottom-b > h4 {
+    font-size: 80px;
+    margin-bottom: -50px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  #top > h1 {
+    font-size: 80px;
+    padding: 10px 30px;
+  }
+
+  #bottom > #bottom-t > #links {
+    width: 100%;
+  }
+
+  #bottom > #bottom-t > #links > ul {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  #bottom > #bottom-b > h4 {
+    font-size: 60px;
+    margin-bottom: -30px;
   }
 }
