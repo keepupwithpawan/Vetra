@@ -8,18 +8,16 @@
   --Green: #137547;
   --Blue: #0a2472;
   --Purple: #933eff;
+  --radius: 0.5rem;
 }
 
 * {
   margin: 0;
   padding: 0;
-
 }
-
 
 body {
   background-color: #030303;
-
   color: white;
   font-family: "General Sans", sans-serif;
   overflow-x: hidden;
@@ -53,20 +51,25 @@ body {
   background-color: black;
   color: white;
   position: relative;
+  padding: 1rem;
 }
 
 .loading-text {
-  font-size: 200px;
+  /* Base size for mobile */
+  font-size: clamp(64px, 15vw, 200px);
   display: flex;
   justify-content: center;
   align-items: center;
   letter-spacing: 0.1em;
   position: relative;
   z-index: 2;
+  width: 100%;
+  flex-wrap: nowrap;
 }
 
 .loading-text span {
-  padding: 40px;
+  /* Responsive padding */
+  padding: clamp(10px, 2vw, 40px);
   background: none;
   transition: opacity 0.3s ease;
   display: inline-block;
@@ -112,8 +115,9 @@ body {
   }
   100% {
     filter: brightness(3);
-    text-shadow: 0 0 50px rgba(255, 255, 255, 1),
-      0 0 70px rgba(255, 255, 255, 1), 0 0 90px rgba(255, 255, 255, 1);
+    text-shadow: 0 0 calc(25px + 2vw) rgba(255, 255, 255, 1),
+                 0 0 calc(35px + 2vw) rgba(255, 255, 255, 1),
+                 0 0 calc(45px + 2vw) rgba(255, 255, 255, 1);
   }
 }
 
@@ -126,54 +130,39 @@ body {
   }
 }
 
-@layer base {
-  :root {
-    --radius: 0.5rem;
+/* Additional responsive breakpoints */
+@media (max-width: 480px) {
+  .loading-text {
+    letter-spacing: 0.05em;
+  }
+  
+  .loading-text span {
+    padding: 8px;
   }
 }
 
+/* Ensure text doesn't overflow on very small devices */
+@media (max-width: 320px) {
+  .loading-text {
+    font-size: 48px;
+    letter-spacing: 0.03em;
+  }
+  
+  .loading-text span {
+    padding: 5px;
+  }
+}
 
 #left {
-  background: none;
-  font-family: 'Melodrama', serif;
-  font-size: 24px;
   background: white;
   color: black;
+  font-family: 'Melodrama', serif;
+  font-size: clamp(18px, 4vw, 24px);
   font-weight: bold;
   padding: 2px 14px;
   border-radius: 100%;
-  box-shadow: 0 0 15px rgba(147, 62, 255, 0.6),  /* Subtle purple glow */
-  0 0 30px rgba(147, 62, 255, 0.5),
-  0 0 50px rgba(147, 62, 255, 0.4),
-  0 0 70px rgba(147, 62, 255, 0.3); /* All sides evenly */
-}
-
-
-#loader {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100px; /* Adjust to maintain proportion */
-  height: 100px; /* Ensures perfect circle */
-  font-family: 'Melodrama', serif;
-  font-size: 50px; /* Adjust size for balance */
-  background: white;
-  color: black;
-  font-weight: bold;
-  border-radius: 50%; /* Makes it perfectly circular */
-  box-shadow: 
-    0 0 15px rgba(147, 62, 255, 0.6),
-    0 0 30px rgba(147, 62, 255, 0.5),
-    0 0 50px rgba(147, 62, 255, 0.4),
-    0 0 70px rgba(147, 62, 255, 0.3);
-  animation: blink 2s infinite ease-in-out; /* Slow blinking animation */
-}
-
-@keyframes blink {
-  0%, 100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.4;
-  }
+  box-shadow: 0 0 15px rgba(147, 62, 255, 0.6),
+              0 0 30px rgba(147, 62, 255, 0.5),
+              0 0 50px rgba(147, 62, 255, 0.4),
+              0 0 70px rgba(147, 62, 255, 0.3);
 }
