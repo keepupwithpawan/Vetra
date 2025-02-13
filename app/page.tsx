@@ -1,4 +1,3 @@
-// app/page.tsx
 "use client";
 
 import React, { useState, useEffect } from "react";
@@ -11,7 +10,6 @@ import Footer from "./components/Footer";
 
 export default function Home() {
   const [currentView, setCurrentView] = useState<number>(1);
-  const [isFading, setIsFading] = useState<boolean>(false);
   const [showLoading, setShowLoading] = useState<boolean>(true);
   const [loadingProgress, setLoadingProgress] = useState<number>(0);
   const [letterVisibility, setLetterVisibility] = useState<number[]>([0, 0, 0, 0, 0]);
@@ -21,6 +19,16 @@ export default function Home() {
   const router = useRouter();
 
   useEffect(() => {
+    // Check if this is the first visit in the current session
+    const hasVisited = sessionStorage.getItem('hasVisitedVetra');
+    
+    if (hasVisited) {
+      // If already visited in this session, skip loading animation
+      setShowLoading(false);
+      return;
+    }
+
+    // If first visit, start loading animation
     const interval = setInterval(() => {
       setLoadingProgress((prev) => {
         if (prev >= 100) {
@@ -55,18 +63,20 @@ export default function Home() {
     setTimeout(() => {
       setShowWhiteOverlay(false);
       setShowLoading(false);
+      // Set session storage to indicate the animation has been shown
+      sessionStorage.setItem('hasVisitedVetra', 'true');
     }, 2000);
   };
 
   const handleScroll = (e: React.WheelEvent<HTMLDivElement>) => {
-    if (isFading || showLoading) return;
+    if (showLoading) return;
 
     if (e.deltaY > 0) {
-      if (currentView === 1) triggerFade(2);
-      else if (currentView === 2) triggerFade(3);
+      if (currentView === 1) setCurrentView(2);
+      else if (currentView === 2) setCurrentView(3);
     } else if (e.deltaY < 0) {
-      if (currentView === 3) triggerFade(2);
-      else if (currentView === 2) triggerFade(1);
+      if (currentView === 3) setCurrentView(2);
+      else if (currentView === 2) setCurrentView(1);
     }
   };
 
@@ -77,24 +87,16 @@ export default function Home() {
   };
 
   const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
-    if (isFading || showLoading) return;
+    if (showLoading) return;
 
     const touchEndY = e.touches[0].clientY;
     if (touchStartYRef.current - touchEndY > 50) {
-      if (currentView === 1) triggerFade(2);
-      else if (currentView === 2) triggerFade(3);
+      if (currentView === 1) setCurrentView(2);
+      else if (currentView === 2) setCurrentView(3);
     } else if (touchEndY - touchStartYRef.current > 50) {
-      if (currentView === 3) triggerFade(2);
-      else if (currentView === 2) triggerFade(1);
+      if (currentView === 3) setCurrentView(2);
+      else if (currentView === 2) setCurrentView(1);
     }
-  };
-
-  const triggerFade = (view: number) => {
-    setIsFading(true);
-    setTimeout(() => {
-      setCurrentView(view);
-      setIsFading(false);
-    }, 1000);
   };
 
   const renderLoadingScreen = () => (
@@ -118,8 +120,7 @@ export default function Home() {
       onTouchMove={handleTouchMove}
     >
       {currentView !== 3 && <Navbar />}
-      <div className={`fade-overlay ${isFading ? "active" : ""}`} />
-      {currentView === 1 && <MainOne onTransition={MainTwo} />}
+      {currentView === 1 && <MainOne />}
       {currentView === 2 && <MainTwo />}
       {currentView === 3 && <Footer />}
     </div>
