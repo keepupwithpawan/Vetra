@@ -9,6 +9,9 @@ export default function Navbar() {
     }
     const aboutRedirect = () =>{
         router.push('/about')
+    }    
+    const pricingRedirect = () =>{
+        router.push('/pricing')
     }
         return (
             <div id="nav">
@@ -19,7 +22,7 @@ export default function Navbar() {
                 <div id="floating-bar">
                     <div id="right">
                         <ul>
-                            <li>Pricing</li>
+                            <li onClick={pricingRedirect}>Pricing</li>
                             <li onClick={aboutRedirect}>About</li>
                             <li onClick={ContactRedirect}>Contact</li>
                         </ul>
