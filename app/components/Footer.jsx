@@ -32,6 +32,7 @@ export default function Footer() {
 
   return (
     <>
+      <div id="footer-container">
       <div id="top">
         <h1
           className={
@@ -65,6 +66,7 @@ export default function Footer() {
         <div id="bottom-b">
           <h4>VETRA</h4>
         </div>
+      </div>
       </div>
     </>
   );
