@@ -24,7 +24,7 @@ const Devs = () => {
                         We aim to make <span className="devs-span">Vetra</span> a tool which will be the first step in any developer's process. We encourage people to <span className="devs-span">share the source</span> of their projects and let others understand how they created what they created!
                         <br /><br />
                     </h4>
-                    <p>- Pawan, Shridhar, Arya, Aryan from <span>Vetra</span></p>
+                    <p>- Pawan, Shridhar from <span>Vetra</span></p>
                 </div>
             </div>
 
