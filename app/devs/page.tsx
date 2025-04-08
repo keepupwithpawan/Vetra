@@ -11,7 +11,7 @@ const Devs = () => {
             <Navbar />
             <div id="devs-container">
                 <div id="devs-img" className="pop-animation">
-                    <Image src={DEVS} alt="Developers GIF" className="devs-img-content" objectFit="cover" />
+                 
                 </div>
                 <div id="text-container">
                     <h1 className="gradient-text">DEVS</h1>
